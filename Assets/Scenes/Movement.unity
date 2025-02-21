@@ -1385,6 +1385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2259288615916d049bacdc67dcf5686a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPrefab: {fileID: 6745136132432405549, guid: 99dbb2f7a04701e46a68d69108b74cb7, type: 3}
+  speed: 4
 --- !u!212 &709757178
 SpriteRenderer:
   m_ObjectHideFlags: 0
