@@ -11,12 +11,15 @@ public class MouseController : MonoBehaviour
     public float speed;
 
     private Pathfinder pathfinder;
+    private RangeFinder rangeFinder;
     private List<OverlayTile> path = new List<OverlayTile>();
+    private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         pathfinder = new Pathfinder();
+        rangeFinder = new RangeFinder();
     }
 
     // Update is called once per frame
@@ -33,16 +36,17 @@ public class MouseController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 //overlayTile.GetComponent<OverlayTile>().ShowTile();
-                overlayTile.ShowTile();
+                //overlayTile.ShowTile();
 
                 if(character == null)
                 {
                     character = Instantiate(characterPrefab).GetComponent<CharacterInfo>();
                     PositionCharacterOnTile(overlayTile);
+                    GetInRangeTiles();
                 }
                 else
                 {
-                    path = pathfinder.FindPath(character.activeTile, overlayTile);
+                    path = pathfinder.FindPath(character.activeTile, overlayTile, inRangeTiles);
                 }
             }
         }
@@ -66,6 +70,11 @@ public class MouseController : MonoBehaviour
             PositionCharacterOnTile(path[0]);
             path.RemoveAt(0);
         }
+
+        if(path.Count == 0)
+        {
+            GetInRangeTiles();
+        }
     }
 
     private void PositionCharacterOnTile(OverlayTile tile)
@@ -88,5 +97,20 @@ public class MouseController : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void GetInRangeTiles()
+    {
+        foreach (var item in inRangeTiles)
+        {
+            item.HideTile();
+        }
+
+        inRangeTiles = rangeFinder.GetTilesInRange(character.activeTile, 3);
+
+        foreach (var item in inRangeTiles)
+        {
+            item.ShowTile();
+        }
     }
 }

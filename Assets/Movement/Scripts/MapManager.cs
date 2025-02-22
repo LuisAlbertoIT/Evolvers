@@ -46,7 +46,7 @@ public class MapManager : MonoBehaviour
                         var overlayTile = Instantiate(overlayTilePrefab, overlayContainer.transform);
                         var cellWorldPosition = tilemap.GetCellCenterWorld(tileLocation);
 
-                        overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z);
+                        overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, 0);
                         overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tilemap.GetComponent<TilemapRenderer>().sortingOrder;
                         overlayTile.gridLocation = tileLocation;
                         map.Add(tilekey, overlayTile);
@@ -56,42 +56,56 @@ public class MapManager : MonoBehaviour
  //       }
     }
 
-    public List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile)
+    public List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile, List<OverlayTile> searchableTiles)
     {
         var map = MapManager.Instance.map;
+
+        Dictionary<Vector2Int, OverlayTile> tileToSearch = new Dictionary<Vector2Int, OverlayTile>();
+
+        if(searchableTiles.Count > 0)
+        {
+            foreach(var item in searchableTiles)
+            {
+                tileToSearch.Add(item.grid2DLocation, item);
+            }
+        }else
+        {
+            tileToSearch = map;
+        }
+
 
         List<OverlayTile> neighbours = new List<OverlayTile>();
 
         //top neighbour
         Vector2Int locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y + 1);
 
-        if (map.ContainsKey(locationToCheck))
+        if (tileToSearch.ContainsKey(locationToCheck))
         {
-            neighbours.Add(map[locationToCheck]);
+            neighbours.Add(tileToSearch[locationToCheck]);
         }
 
         //bottom neighbour
         locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y - 1);
 
-        if (map.ContainsKey(locationToCheck))
+        if (tileToSearch.ContainsKey(locationToCheck))
         {
-            neighbours.Add(map[locationToCheck]);
+            neighbours.Add(tileToSearch[locationToCheck]);
         }
 
         //right neighbour
         locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x + 1, currentOverlayTile.gridLocation.y);
 
-        if (map.ContainsKey(locationToCheck))
+        if (tileToSearch.ContainsKey(locationToCheck))
         {
-            neighbours.Add(map[locationToCheck]);
+            neighbours.Add(tileToSearch[locationToCheck]);
         }
 
         //left neighbour
         locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x - 1, currentOverlayTile.gridLocation.y);
 
-        if (map.ContainsKey(locationToCheck))
+        if (tileToSearch.ContainsKey(locationToCheck))
         {
-            neighbours.Add(map[locationToCheck]);
+            neighbours.Add(tileToSearch[locationToCheck]);
         }
 
         return neighbours;
