@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class RangeFinder
 {
@@ -10,7 +11,7 @@ public class RangeFinder
         var inRangeTiles = new List<OverlayTile>();
         int stepCount = 0;
 
-        inRangeTiles.Add(startingTile);
+        //inRangeTiles.Add(startingTile);
 
         var tileForPreviousStep = new List<OverlayTile>();
         tileForPreviousStep.Add(startingTile);

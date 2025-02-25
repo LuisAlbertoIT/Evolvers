@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,6 +8,9 @@ using static ArrowTranslator;
 
 public class MouseController : MonoBehaviour
 {
+    private static MouseController _instance;
+    public static MouseController Instance { get { return _instance; } }
+
     public GameObject characterPrefab;
     private CharacterInfo character;
     public float speed;
@@ -18,6 +22,18 @@ public class MouseController : MonoBehaviour
     private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
 
     private bool isMoving = false;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -57,12 +73,9 @@ public class MouseController : MonoBehaviour
                 }
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && inRangeTiles.Contains(overlayTile))
             {
-                //overlayTile.GetComponent<OverlayTile>().ShowTile();
-                //overlayTile.ShowTile();
-
-                if(character == null)
+                /*if (character == null)
                 {
                     character = Instantiate(characterPrefab).GetComponent<CharacterInfo>();
                     PositionCharacterOnTile(overlayTile);
@@ -70,8 +83,10 @@ public class MouseController : MonoBehaviour
                 }
                 else
                 {
-                    isMoving = true;
-                }
+                    if(inRangeTiles.Contains(overlayTile))
+                        isMoving = true;
+                }*/
+                isMoving = true;
             }
         }
 
@@ -99,7 +114,8 @@ public class MouseController : MonoBehaviour
         {
             GetInRangeTiles();
             isMoving = false;
-        }
+            character.canMove = false;
+        }     
     }
 
     private void PositionCharacterOnTile(OverlayTile tile)
@@ -107,6 +123,13 @@ public class MouseController : MonoBehaviour
         character.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
         character.GetComponent<SpriteRenderer>().sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
         character.activeTile = tile;
+    }
+
+    public void PositionCharacterOnTile(CharacterInfo chara, OverlayTile tile)
+    {
+        chara.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
+        chara.GetComponent<SpriteRenderer>().sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
+        chara.activeTile = tile;
     }
 
     public RaycastHit2D? GetFocusedOnTile()
@@ -118,24 +141,35 @@ public class MouseController : MonoBehaviour
 
         if(hits.Length > 0)
         {
-            return hits.OrderByDescending(i => i.collider.transform.position).First();
+            return hits[hits.Length-1];
+            //return hits.OrderByDescending(i => i.collider.transform.position).First();
         }
 
         return null;
     }
 
-    private void GetInRangeTiles()
+    public void GetInRangeTiles()
     {
-        foreach (var item in inRangeTiles)
-        {
-            item.HideTile();
-        }
+        HideRangeTiles();
 
-        inRangeTiles = rangeFinder.GetTilesInRange(character.activeTile, 3);
+        inRangeTiles = rangeFinder.GetTilesInRange(character.activeTile, character.range);
 
         foreach (var item in inRangeTiles)
         {
             item.ShowTile();
         }
+    }
+
+    public void HideRangeTiles()
+    {
+        foreach (var item in inRangeTiles)
+        {
+            item.HideTile();
+        }
+    }
+
+    public void SetCharacter(CharacterInfo chara)
+    {
+        character = chara;
     }
 }

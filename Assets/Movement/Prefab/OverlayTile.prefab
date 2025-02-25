@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2179109736262243926}
   - component: {fileID: 4595142858361028208}
   - component: {fileID: 1478264776458030619}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OverlayTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4583860579433917229}
   - component: {fileID: 89057896398911419}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DirectionalArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -58,6 +58,7 @@ public class OverlayTile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         isBlocked = true;
+        //collision.transform.position = transform.position;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
