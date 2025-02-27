@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b68a1aea6d81de147818014c7342b20e
+guid: 8a501addb32c2624a8537915156185e5
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -103,10 +103,10 @@ TextureImporter:
       name: EvolverCuernos_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 11
-        width: 10
-        height: 5
+        x: 0
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
