@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1bc83786e28eaa34d83633e84a5dffe4
+guid: e4a298fd7a850884983d424a3bbb3276
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1708384841218959906
-    second: EvolverOjos 1_0
+      213: 627799939230506038
+    second: EvolverCuerpoGrande_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EvolverOjos 1_0
+      name: EvolverCuerpoGrande_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 16
+        x: 1
+        y: 1
+        width: 14
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ed55b7fc9099a48e0800000000000000
-      internalID: -1708384841218959906
+      spriteID: 63c98dfe7b466b800800000000000000
+      internalID: 627799939230506038
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      EvolverOjos 1_0: -1708384841218959906
+      EvolverCuerpoGrande_0: 627799939230506038
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

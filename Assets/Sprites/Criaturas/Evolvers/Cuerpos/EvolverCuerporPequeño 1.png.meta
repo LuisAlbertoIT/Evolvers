@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 341c3155e5d14ba408643133b51fa0de
+guid: 9af329d976c38274790949557e2030cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9107982151386824775
-    second: EvolverCuerpoGrande 1_0
+      213: 5792101946446704722
+    second: "EvolverCuerporPeque\xF1o 1_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EvolverCuerpoGrande 1_0
+      name: "EvolverCuerporPeque\xF1o 1_0"
       rect:
         serializedVersion: 2
-        x: 1
+        x: 3
         y: 1
-        width: 14
-        height: 15
+        width: 10
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9bf7dfd4d72f99180800000000000000
-      internalID: -9107982151386824775
+      spriteID: 250fdcc480ea16050800000000000000
+      internalID: 5792101946446704722
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      EvolverCuerpoGrande 1_0: -9107982151386824775
+      "EvolverCuerporPeque\xF1o 1_0": 5792101946446704722
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

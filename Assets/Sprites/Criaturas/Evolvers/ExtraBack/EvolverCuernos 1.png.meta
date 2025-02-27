@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8a501addb32c2624a8537915156185e5
+guid: 97e2fafd958d57c4d913fc1de9f87119
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4052782154741019726
-    second: EvolverCuernos_0
+      213: 2873541537192163668
+    second: EvolverCuernos 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EvolverCuernos_0
+      name: EvolverCuernos 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2bb8e925a10a1c7c0800000000000000
-      internalID: -4052782154741019726
+      spriteID: 4593babadced0e720800000000000000
+      internalID: 2873541537192163668
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      EvolverCuernos_0: -4052782154741019726
+      EvolverCuernos 1_0: 2873541537192163668
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
