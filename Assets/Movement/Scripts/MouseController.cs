@@ -20,6 +20,7 @@ public class MouseController : MonoBehaviour
     private ArrowTranslator arrowTranslator;
     private List<OverlayTile> path = new List<OverlayTile>();
     private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
+    private List<OverlayTile> inAttackRangeTiles = new List<OverlayTile>();
 
     private bool isMoving = false;
 
@@ -63,7 +64,9 @@ public class MouseController : MonoBehaviour
                     item.SetArrowSprite(ArrowDirection.None);
                 }
 
-                for(int i = 0; i < path.Count; i++)
+                GetInAttackRangeTiles(overlayTile);
+
+                for (int i = 0; i < path.Count; i++)
                 {
                     var previousTile = i > 0 ? path[i-1] : character.activeTile;
                     var futureTile = i < path.Count - 1 ? path[i+1] : null;
@@ -71,6 +74,8 @@ public class MouseController : MonoBehaviour
                     var arrowDir = arrowTranslator.TranslateDirection(previousTile, path[i], futureTile);
                     path[i].SetArrowSprite(arrowDir);
                 }
+
+                
             }
 
             if (Input.GetMouseButtonDown(0) && inRangeTiles.Contains(overlayTile))
@@ -87,6 +92,11 @@ public class MouseController : MonoBehaviour
                         isMoving = true;
                 }*/
                 isMoving = true;
+            }
+
+            if (Input.GetMouseButtonDown(0) && inAttackRangeTiles.Contains(overlayTile) && overlayTile.collisionGO.GetComponent<CharacterInfo>() != null)
+            {
+                Debug.Log(character.name+" attacks "+overlayTile.collisionGO.name);
             }
         }
 
@@ -156,7 +166,19 @@ public class MouseController : MonoBehaviour
 
         foreach (var item in inRangeTiles)
         {
-            item.ShowTile();
+            item.ShowTile(0);
+        }
+    }
+
+    public void GetInAttackRangeTiles(OverlayTile tile)
+    {
+        HideAttackRangeTiles();
+
+        inAttackRangeTiles = rangeFinder.GetTilesInAttackRange(tile, character.attackRange);
+
+        foreach (var item in inAttackRangeTiles)
+        {
+            item.ShowTile(1);
         }
     }
 
@@ -165,6 +187,19 @@ public class MouseController : MonoBehaviour
         foreach (var item in inRangeTiles)
         {
             item.HideTile();
+        }
+    }
+
+    public void HideAttackRangeTiles()
+    {
+        foreach (var item in inAttackRangeTiles)
+        {
+            item.HideTile();
+            foreach (var item2 in inRangeTiles)
+            {
+                if (item2 == item)
+                    item.ShowTile(0);
+            }
         }
     }
 

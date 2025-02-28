@@ -104,6 +104,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeTile: {fileID: 0}
   range: 3
+  attackRange: 1
+  canMove: 1
+  canAct: 1
 --- !u!61 &7913053143652596885
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -19,6 +19,8 @@ public class OverlayTile : MonoBehaviour
 
     public List<Sprite> arrows;
 
+    public GameObject collisionGO;
+
 
     // Update is called once per frame
     /*    void Update()
@@ -29,9 +31,16 @@ public class OverlayTile : MonoBehaviour
             }
         }*/
 
-    public void ShowTile()
+    public void ShowTile(int color)
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new  Color(1, 1, 1, 1);
+        if(color == 1)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 1, 1);
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        }
     }
 
     public void HideTile()
@@ -58,11 +67,13 @@ public class OverlayTile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         isBlocked = true;
+        collisionGO = collision.gameObject;
         //collision.transform.position = transform.position;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         isBlocked = false;
+        collisionGO = null;
     }
 }
