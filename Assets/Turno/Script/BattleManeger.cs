@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -32,7 +33,7 @@ public class BattleManeger : MonoBehaviour
         int count = 0;
         foreach (GameObject player in players)
         {
-            if (player.GetComponent<PlayerController>().playerEndTurn)
+            if (player != null && player.GetComponent<PlayerController>().playerEndTurn)
             {
                 count++;
             }
@@ -51,11 +52,14 @@ public class BattleManeger : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
         {
-            EnemyController enemyController = enemy.GetComponent<EnemyController>();
-            if (!enemyController.enemyEndTurn)
+            if (enemy != null)
             {
-                yield return new WaitForSeconds(1.5f); // Pausa entre ataques
-                enemyController.EnemyAtk();
+                EnemyController enemyController = enemy.GetComponent<EnemyController>();
+                if (!enemyController.enemyEndTurn)
+                {
+                    yield return new WaitForSeconds(1.5f); // Pausa entre ataques
+                    enemyController.EnemyAtk();
+                }
             }
         }
 
@@ -72,12 +76,18 @@ public class BattleManeger : MonoBehaviour
     {
         foreach (GameObject player in players)
         {
-            player.GetComponent<PlayerController>().playerEndTurn = false;
+            if (player != null)
+            {
+                player.GetComponent<PlayerController>().playerEndTurn = false;
+            }
         }
 
         foreach (GameObject enemy in enemies)
         {
-            enemy.GetComponent<EnemyController>().enemyEndTurn = false;
+            if (enemy != null)
+            {
+                enemy.GetComponent<EnemyController>().enemyEndTurn = false;
+            }
         }
     }
 
@@ -106,6 +116,22 @@ public class BattleManeger : MonoBehaviour
         {
             enemyTarget.GetComponent<EnemyController>().EnemyDeSelect();
             enemyTarget = null;
+        }
+    }
+
+    public void CheckGameOver()
+    {
+        players = Array.FindAll(players, player => player != null);
+        enemies = Array.FindAll(enemies, enemy => enemy != null);
+
+        if (players.Length == 0)
+        {
+            Debug.Log("Game Over");
+        }
+
+        if (enemies.Length == 0)
+        {
+            Debug.Log("Winner");
         }
     }
 
