@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject markerSelect;
     public GameObject action;
     public BattleManeger sbm;
+    public GameObject CederTruno;
 
     public Image healthBar;
     private int maxHealth = 100;
@@ -32,6 +33,36 @@ public class PlayerController : MonoBehaviour
             }
             PlayerSelect();
             sbm.PlayerSelect(gameObject);
+        }
+        else if (playerEndTurn && sbm.PlayerActive != gameObject && sbm.PlayerActive != null)
+        {
+            if (sbm.playerTarget != gameObject && sbm.playerTarget != null)
+            {
+                sbm.PlayerToPlayerDeSelect();
+            }
+            PlayerToPlayerSelect();
+            sbm.PlayerToPlayerSelect(gameObject);
+        }
+    }
+    public void PlayerToPlayerSelect()
+    {
+        markerSelect.SetActive(true);
+        if (sbm.PlayerActive != null)
+        {
+            sbm.PlayerActive.GetComponent<PlayerController>().CederTruno.SetActive(true);
+        }
+    }
+
+    public void CedeTurno()
+    {
+        if (sbm.playerTarget != null)
+        {
+            print("Cede Turno al " + sbm.playerTarget.name);
+            sbm.playerTarget.GetComponent<PlayerController>().playerEndTurn = true; // El jugador seleccionado puede actuar
+            playerEndTurn = true; // Este jugador termina su turno
+            CederTruno.SetActive(false);
+            markerSelect.SetActive(false);
+            sbm.playerTarget.GetComponent<PlayerController>().playerEndTurn = false;
         }
     }
 
@@ -84,4 +115,5 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject);
         sbm.CheckGameOver();
     }
+
 }

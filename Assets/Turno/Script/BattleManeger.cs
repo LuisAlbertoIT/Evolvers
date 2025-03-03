@@ -14,6 +14,9 @@ public class BattleManeger : MonoBehaviour
     public bool enemyEndTurn;
     private bool enemyTurnActive = false;
 
+
+    public GameObject playerTarget; // Añadir esta línea
+
     private void Awake()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -94,6 +97,7 @@ public class BattleManeger : MonoBehaviour
     public void PlayerSelect(GameObject playerSelect)
     {
         PlayerActive = playerSelect;
+
     }
 
     public void PlayerDeSelect()
@@ -102,6 +106,19 @@ public class BattleManeger : MonoBehaviour
         {
             PlayerActive.GetComponent<PlayerController>().PlayerDeSelect();
             PlayerActive = null;
+        }
+    }
+    public void PlayerToPlayerSelect(GameObject playerSelect)
+    {
+        playerTarget = playerSelect;
+    }
+
+    public void PlayerToPlayerDeSelect()
+    {
+        if (playerTarget != null)
+        {
+            playerTarget.GetComponent<PlayerController>().PlayerDeSelect();
+            playerTarget = null;
         }
     }
 
@@ -134,5 +151,6 @@ public class BattleManeger : MonoBehaviour
             Debug.Log("Winner");
         }
     }
+
 
 }
