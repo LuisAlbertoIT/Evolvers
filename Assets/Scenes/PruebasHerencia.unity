@@ -119,6 +119,196 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &145971325
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.068533815
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5651805256188948367, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b6a6855a55806334c97b6dadcdeca23d, type: 3}
+    - target: {fileID: 6658141760535515045, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_Name
+      value: Evolver (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6658141760535515045, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 145971327}
+  m_SourcePrefab: {fileID: 100100000, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+--- !u!1 &145971326 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6658141760535515045, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+  m_PrefabInstance: {fileID: 145971325}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &145971327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145971326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4adc3542e0590954ea577d4eaa1f2220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Vida: 10
+  VidaMax: 20
+  Energia: 5
+  EnergiaMax: 10
+  Acciones: 3
+  AccionesMax: 3
+  Vitalidad: 2
+  Vigor: 4
+  Fuerza: 10
+  Adaptabilidad: 4
+  Inteligencia: 6
+  Velocidad: 2
+  Metabolismo: 1
+  Traits: []
+--- !u!1001 &1718151944
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.056379
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.068533815
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293341489906097184, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5651805256188948367, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c07716b3f1d6f87459910ff5b191a5d1, type: 3}
+    - target: {fileID: 6658141760535515045, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      propertyPath: m_Name
+      value: Evolver
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6658141760535515045, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1718151946}
+  m_SourcePrefab: {fileID: 100100000, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+--- !u!1 &1718151945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6658141760535515045, guid: 4a9460f510770f84ca8bfd2b0fed0b39, type: 3}
+  m_PrefabInstance: {fileID: 1718151944}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1718151946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718151945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4adc3542e0590954ea577d4eaa1f2220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Vida: 10
+  VidaMax: 10
+  Energia: 10
+  EnergiaMax: 10
+  Acciones: 3
+  AccionesMax: 3
+  Vitalidad: 5
+  Vigor: 4
+  Fuerza: 3
+  Adaptabilidad: 2
+  Inteligencia: 3
+  Velocidad: 2
+  Metabolismo: 2
+  Traits: []
 --- !u!1 &1869004414
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,6 +320,7 @@ GameObject:
   - component: {fileID: 1869004417}
   - component: {fileID: 1869004416}
   - component: {fileID: 1869004415}
+  - component: {fileID: 1869004418}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -211,8 +402,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1869004418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869004414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80077999e6dbd64dbd52e3bd6e94e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Evo1: {fileID: 1718151945}
+  Evo2: {fileID: 145971326}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1869004417}
+  - {fileID: 1718151944}
+  - {fileID: 145971325}
