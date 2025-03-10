@@ -103,8 +103,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTile: {fileID: 0}
+  characterName: 
+  maxHP: 100
+  currentHP: 0
+  attack: 10
+  defense: 5
   range: 3
-  attackRange: 1
+  level: 1
+  currentEXP: 0
+  expToNextLevel: 100
+  attacks: []
   canMove: 1
   canAct: 1
 --- !u!61 &7913053143652596885

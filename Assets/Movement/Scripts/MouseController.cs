@@ -19,7 +19,7 @@ public class MouseController : MonoBehaviour
     private RangeFinder rangeFinder;
     private ArrowTranslator arrowTranslator;
     private List<OverlayTile> path = new List<OverlayTile>();
-    private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
+    public List<OverlayTile> inRangeTiles = new List<OverlayTile>();
     private List<OverlayTile> inAttackRangeTiles = new List<OverlayTile>();
 
     private bool isMoving = false;
@@ -55,7 +55,7 @@ public class MouseController : MonoBehaviour
             transform.position = new Vector3(overlayTile.transform.position.x, overlayTile.transform.position.y, overlayTile.transform.position.z-1);
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder;
 
-            if (inRangeTiles.Contains(overlayTile) && !isMoving)
+            if (inRangeTiles.Contains(overlayTile) && !isMoving && character.canMove)
             {
                 path = pathfinder.FindPath(character.activeTile, overlayTile, inRangeTiles);
 
@@ -92,11 +92,22 @@ public class MouseController : MonoBehaviour
                         isMoving = true;
                 }*/
                 isMoving = true;
+                character.canAct = true;
             }
 
-            if (Input.GetMouseButtonDown(0) && inAttackRangeTiles.Contains(overlayTile) && overlayTile.collisionGO.GetComponent<CharacterInfo>() != null)
+            if (Input.GetMouseButtonDown(0) && inAttackRangeTiles.Contains(overlayTile))
             {
-                Debug.Log(character.name+" attacks "+overlayTile.collisionGO.name);
+                //Debug.Log(character.name+" attacks "+overlayTile.collisionGO.name);
+                if (overlayTile.collisionGO.GetComponent<CharacterInfo>() != null)
+                {
+                    character.PerformAttack(0, overlayTile.collisionGO.GetComponent<CharacterInfo>());
+                    character.canAct = false;
+
+                }
+                else
+                {
+                    Debug.Log("Can't hit");
+                }
             }
         }
 
@@ -122,7 +133,8 @@ public class MouseController : MonoBehaviour
 
         if(path.Count == 0)
         {
-            GetInRangeTiles();
+            //GetInRangeTiles();
+            HideRangeTiles();
             isMoving = false;
             character.canMove = false;
         }     
@@ -174,7 +186,17 @@ public class MouseController : MonoBehaviour
     {
         HideAttackRangeTiles();
 
-        inAttackRangeTiles = rangeFinder.GetTilesInAttackRange(tile, character.attackRange);
+        int range = 0;
+        foreach (Attacks attack in character.attacks)
+        {
+            if(attack.attackName == character.activeAtk)
+            {
+                range = attack.range;
+                break;
+            }
+        }
+
+        inAttackRangeTiles = rangeFinder.GetTilesInAttackRange(tile, range);
 
         foreach (var item in inAttackRangeTiles)
         {
@@ -187,6 +209,14 @@ public class MouseController : MonoBehaviour
         foreach (var item in inRangeTiles)
         {
             item.HideTile();
+            if(character.canAct)
+            {
+                foreach (var item2 in inAttackRangeTiles)
+                {
+                    if (item2 == item)
+                        item.ShowTile(1);
+                }
+            }
         }
     }
 
@@ -195,10 +225,13 @@ public class MouseController : MonoBehaviour
         foreach (var item in inAttackRangeTiles)
         {
             item.HideTile();
-            foreach (var item2 in inRangeTiles)
+            if (character.canMove)
             {
-                if (item2 == item)
-                    item.ShowTile(0);
+                foreach (var item2 in inRangeTiles)
+                {
+                    if (item2 == item)
+                        item.ShowTile(0);
+                }
             }
         }
     }
