@@ -12,5 +12,11 @@ public class TraitColorChanger : TraitBase
             sr.color = newColor;
         }
     }
+
+    void Start()
+    {
+        ApplyEffect();
+    }
+
 }
 

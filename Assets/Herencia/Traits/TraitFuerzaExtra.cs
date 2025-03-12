@@ -11,4 +11,10 @@ public class TraitFuerzaExtra : TraitBase
             Debug.Log("Fuerza aumentada en +5");
         }
     }
+
+    void Start()
+    {
+        ApplyEffect();
+    }
+
 }

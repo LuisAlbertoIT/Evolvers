@@ -8,6 +8,16 @@ public static class GeneticsSystem
         GameObject childObject = new GameObject("Nueva Criatura");
         Creature child = childObject.AddComponent<Creature>();
 
+        // Añadir prefab a la nueva criatura
+        GameObject prefab = Resources.Load<GameObject>("Sprites/Criaturas/Evolvers/Evolver");
+        if (prefab != null)
+        {
+            GameObject.Instantiate(prefab, childObject.transform);
+        }
+        
+
+
+
         // Herencia de stats
         child.Fuerza = Random.Range(parent1.Fuerza, parent2.Fuerza + 1);
         child.Vitalidad = Random.Range(parent1.Vitalidad, parent2.Vitalidad + 1);
@@ -16,6 +26,14 @@ public static class GeneticsSystem
         child.Inteligencia = Random.Range(parent1.Inteligencia, parent2.Inteligencia + 1);
         child.Velocidad = Random.Range(parent1.Velocidad, parent2.Velocidad + 1);
         child.Metabolismo = Random.Range(parent1.Metabolismo, parent2.Metabolismo + 1);
+
+        child.VidaMax = child.Vitalidad * 10;
+        child.Vida = child.VidaMax;
+        child.EnergiaMax = child.Vigor * 10;
+        child.Energia = child.EnergiaMax;
+
+        child.AccionesMax = 3;
+        child.Acciones = child.AccionesMax;
 
         // Herencia de traits (50% de probabilidad por cada trait)
         foreach (TraitBase trait in parent1.Traits)
