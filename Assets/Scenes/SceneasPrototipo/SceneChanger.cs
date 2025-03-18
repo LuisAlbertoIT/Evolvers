@@ -1,12 +1,17 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    //Funcion que carga la escena por nombre
-    public void ChangeScene(string sceneName)
+    public void CargarEscena(string nombreEscena)
     {
-        //Carga la escena con el nombre que se le pase
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(nombreEscena);
     }
 
+    public void EnviarCriaturasAEscena(string nombreEscena)
+    {
+        DontDestroyOnLoad(GameManager.instancia.gameObject);
+        SceneManager.LoadScene(nombreEscena);
+    }
 }
+

@@ -3,10 +3,10 @@ using UnityEngine;
 
 public static class GeneticsSystem
 {
-    public static Creature BreedCreatures(Creature parent1, Creature parent2)
+    public static Criatura BreedCreatures(Criatura parent1, Criatura parent2)
     {
         GameObject childObject = new GameObject("Nueva Criatura");
-        Creature child = childObject.AddComponent<Creature>();
+        Criatura child = childObject.AddComponent<Criatura>();
 
         // Añadir prefab a la nueva criatura
         GameObject prefab = Resources.Load<GameObject>("Sprites/Criaturas/Evolvers/Evolver");

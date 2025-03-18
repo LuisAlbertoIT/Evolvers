@@ -7,10 +7,10 @@ public class TestHerencia : MonoBehaviour
 
     void Start()
     {
-        Creature obj1 = Evo1.GetComponent<Creature>();
-        Creature obj2 = Evo2.GetComponent<Creature>();
+        Criatura obj1 = Evo1.GetComponent<Criatura>();
+        Criatura obj2 = Evo2.GetComponent<Criatura>();
 
-        Creature child = GeneticsSystem.BreedCreatures(obj1, obj2);
+        Criatura child = GeneticsSystem.BreedCreatures(obj1, obj2);
 
         Debug.Log($"Criatura Hija: Fuerza {child.Fuerza}, Velocidad {child.Velocidad}, Inteligencia {child.Inteligencia}, Vitalidad {child.Vitalidad}, Vigor {child.Adaptabilidad}, Metabolismo {child.Metabolismo}");
         Debug.Log("Traits Heredados:");

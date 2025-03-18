@@ -4,7 +4,7 @@ public class TraitFuerzaExtra : TraitBase
 {
     public override void ApplyEffect()
     {
-        Creature creature = GetComponent<Creature>();
+        Criatura creature = GetComponent<Criatura>();
         if (creature != null)
         {
             creature.Fuerza += 5;
