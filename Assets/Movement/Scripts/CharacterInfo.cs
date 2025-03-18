@@ -39,13 +39,13 @@ public class CharacterInfo : MonoBehaviour
         attacks.Add(gameObject.AddComponent<Attacks>().AcidSpit());
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, CharacterInfo attacker)
     {
         currentHP -= damage;
         Debug.Log($"{characterName} takes {damage} damage! HP: {currentHP}/{maxHP}");
         if (currentHP <= 0)
         {
-            Die();
+            Die(attacker);
         }
     }
 
@@ -55,9 +55,13 @@ public class CharacterInfo : MonoBehaviour
         Debug.Log($"{characterName} heals for {amount}! HP: {currentHP}/{maxHP}");
     }
 
-    private void Die()
+    private void Die(CharacterInfo attacker)
     {
         Debug.Log($"{characterName} has been defeated!");
+        if (gameObject.CompareTag("Enemy"))
+        {
+            attacker.GainEXP(GetComponent<EnemyAI>().expReward);
+        }
         gameObject.SetActive(false);
         Destroy(gameObject);
         if (gameObject.CompareTag("Enemy"))
@@ -82,10 +86,10 @@ public class CharacterInfo : MonoBehaviour
         currentEXP -= expToNextLevel;
         expToNextLevel = Mathf.RoundToInt(expToNextLevel * 1.5f);
 
-        maxHP += 10;
+        maxHP += Random.Range(10,30);
         currentHP = maxHP;
-        attack += 2;
-        defense += 1;
+        attack += Random.Range(0, 2); ;
+        defense += Random.Range(0, 4); ;
 
         Debug.Log($"{characterName} leveled up to Level {level}! HP: {maxHP}, Attack: {attack}, Defense: {defense}");
     }

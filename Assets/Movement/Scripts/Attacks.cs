@@ -38,8 +38,8 @@ public class Attacks : MonoBehaviour
 
     public void Execute(CharacterInfo attacker, CharacterInfo target, int dammage)
     {
-        int finalDamage = Mathf.Max(0, dammage * attacker.attack - target.defense);
+        int finalDamage = Mathf.Max(0, dammage * attacker.attack - (target.defense + target.defense*2));
         Debug.Log($"{attacker.characterName} uses {attacker.activeAtk} on {target.characterName} for {finalDamage} damage!");
-        target.TakeDamage(finalDamage);
+        target.TakeDamage(finalDamage, attacker);
     }
 }

@@ -10,6 +10,8 @@ public class EnemyAI : MonoBehaviour
 
     private bool turnActive = false;       // Indica si la IA está en turno
 
+    public int expReward = 100;
+
     private void Start()
     {
         if (enemyCharacter == null)

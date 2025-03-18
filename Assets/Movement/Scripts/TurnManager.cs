@@ -111,6 +111,8 @@ public class TurnManager : MonoBehaviour
     private void EnemyTurn()
     {
         playerTurn = false;
+        turnPanel.SetActive(false);
+        attackPanel.SetActive(false);
         Debug.Log("Enemy Turn");
         foreach (CharacterInfo enemy in enemies)
         {
@@ -129,6 +131,7 @@ public class TurnManager : MonoBehaviour
             EnemyAI ai = enemy.GetComponent<EnemyAI>();
             if (ai != null)
             {
+                FindAnyObjectByType<Camera>().transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y, -10);
                 ai.TakeTurn();
                 // Espera hasta que este enemigo termine su turno.
                 while (enemy.canMove || enemy.canAct)
