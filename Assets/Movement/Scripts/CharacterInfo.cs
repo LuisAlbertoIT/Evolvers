@@ -59,6 +59,11 @@ public class CharacterInfo : MonoBehaviour
     {
         Debug.Log($"{characterName} has been defeated!");
         gameObject.SetActive(false);
+        Destroy(gameObject);
+        if (gameObject.CompareTag("Enemy"))
+            TurnManager.Instance.enemies.Remove(this);
+        else if (gameObject.CompareTag("Player"))
+            TurnManager.Instance.characters.Remove(this);
     }
 
     public void GainEXP(int exp)

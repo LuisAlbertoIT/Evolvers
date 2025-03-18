@@ -56,7 +56,7 @@ public class MapManager : MonoBehaviour
  //       }
     }
 
-    public List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile, List<OverlayTile> searchableTiles)
+    public List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile, List<OverlayTile> searchableTiles, OverlayTile endTile = null)
     {
         var map = MapManager.Instance.map;
 
@@ -79,7 +79,7 @@ public class MapManager : MonoBehaviour
         //top neighbour
         Vector2Int locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y + 1);
 
-        if (tileToSearch.ContainsKey(locationToCheck) && !tileToSearch[locationToCheck].isBlocked)
+        if (tileToSearch.ContainsKey(locationToCheck) && (!tileToSearch[locationToCheck].isBlocked || (endTile != null && tileToSearch[locationToCheck] == endTile)))
         {
             neighbours.Add(tileToSearch[locationToCheck]);
         }
@@ -87,7 +87,7 @@ public class MapManager : MonoBehaviour
         //bottom neighbour
         locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y - 1);
 
-        if (tileToSearch.ContainsKey(locationToCheck) && !tileToSearch[locationToCheck].isBlocked)
+        if (tileToSearch.ContainsKey(locationToCheck) && (!tileToSearch[locationToCheck].isBlocked || (endTile != null && tileToSearch[locationToCheck] == endTile)))
         {
             neighbours.Add(tileToSearch[locationToCheck]);
         }
@@ -95,7 +95,7 @@ public class MapManager : MonoBehaviour
         //right neighbour
         locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x + 1, currentOverlayTile.gridLocation.y);
 
-        if (tileToSearch.ContainsKey(locationToCheck) && !tileToSearch[locationToCheck].isBlocked)
+        if (tileToSearch.ContainsKey(locationToCheck) && (!tileToSearch[locationToCheck].isBlocked || (endTile != null && tileToSearch[locationToCheck] == endTile)))
         {
             neighbours.Add(tileToSearch[locationToCheck]);
         }
@@ -103,7 +103,7 @@ public class MapManager : MonoBehaviour
         //left neighbour
         locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x - 1, currentOverlayTile.gridLocation.y);
 
-        if (tileToSearch.ContainsKey(locationToCheck) && !tileToSearch[locationToCheck].isBlocked)
+        if (tileToSearch.ContainsKey(locationToCheck) && (!tileToSearch[locationToCheck].isBlocked || (endTile != null && tileToSearch[locationToCheck] == endTile)))
         {
             neighbours.Add(tileToSearch[locationToCheck]);
         }
