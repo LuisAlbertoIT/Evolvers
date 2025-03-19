@@ -106,7 +106,7 @@ public class MouseController : MonoBehaviour
                     return;
 
                 //Debug.Log(character.name+" attacks "+overlayTile.collisionGO.name);
-                if (overlayTile.collisionGO.GetComponent<CharacterInfo>() != null)
+                if (overlayTile.collisionGO.GetComponent<CharacterInfo>() != null) 
                 {
                     character.PerformAttack(0, overlayTile.collisionGO.GetComponent<CharacterInfo>());
                     character.canAct = false;
