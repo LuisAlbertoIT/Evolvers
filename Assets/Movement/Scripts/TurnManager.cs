@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class TurnManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class TurnManager : MonoBehaviour
     public GameObject attackPanel;
     private Button btn;
     public List<Button> buttons;
+    private bool gameOver = false;
 
     private void Awake()
     {
@@ -56,56 +58,47 @@ public class TurnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(turn == 0)
+        CheckGameOver();
+        if (!gameOver)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-                StartCombat();
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-            NextCharacter();
-        if (Input.GetKeyDown(KeyCode.A))
-            PreviousCharacter();
-        if(playerTurn)
-        {
-            if (!characters[activeCharacter].canMove && !characters[activeCharacter].canAct)
+            if (turn == 0)
             {
-                bool allDone = true;
-                foreach (CharacterInfo character in characters)
+                if (Input.GetKeyDown(KeyCode.Space))
+                    StartCombat();
+            }
+            
+            if (playerTurn)
+            {
+                if (!MouseController.Instance.isMoving)
                 {
-                    if (character.canMove || character.canAct)
+                    if (Input.GetKeyDown(KeyCode.D))
+                        NextCharacter();
+                    if (Input.GetKeyDown(KeyCode.A))
+                        PreviousCharacter();
+                }
+                if (!characters[activeCharacter].canMove && !characters[activeCharacter].canAct)
+                {
+                    bool allDone = true;
+                    foreach (CharacterInfo character in characters)
                     {
-                        allDone = false;
-                        break;
+                        if (character.canMove || character.canAct)
+                        {
+                            allDone = false;
+                            break;
+                        }
                     }
+                    if (allDone)
+                    {
+                        EnemyTurn();
+                    }
+                    else
+                        NextCharacter();
                 }
-                if (allDone)
-                {
-                    EnemyTurn();
-                }
-                else
-                    NextCharacter();
             }
         }
-    }
-
-    private void StartCombat()
-    {
-        turnPanel.SetActive(true);
-        attackPanel.SetActive(false);
-        playerTurn = true;
-        turn++;
-        Debug.Log("Turn" + turn);
-
-        foreach (CharacterInfo character in characters)
-        {
-            MouseController.Instance.SetCharacter(character);
-            MouseController.Instance.PositionCharacterOnTile(character, character.activeTile);
-            character.canMove = true;
-            character.canAct = false;
-        }
-        activeCharacter = 0;
-
-        UpdateUI();
+        else
+            if (Input.GetKeyDown(KeyCode.Space))
+                GetComponent<SceneChanger>().CargarEscena("Base");
     }
 
     private void EnemyTurn()
@@ -133,7 +126,6 @@ public class TurnManager : MonoBehaviour
             {
                 FindAnyObjectByType<Camera>().transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y, -10);
                 ai.TakeTurn();
-                // Espera hasta que este enemigo termine su turno.
                 while (enemy.canMove || enemy.canAct)
                 {
                     yield return null;
@@ -141,7 +133,6 @@ public class TurnManager : MonoBehaviour
             }
         }
 
-        // Verifica que todos los enemigos hayan terminado sus acciones.
         bool allEnemiesDone = false;
         while (!allEnemiesDone)
         {
@@ -156,14 +147,32 @@ public class TurnManager : MonoBehaviour
             }
             yield return null;
         }
+        if(!gameOver)
+            StartCombat();
+    }
 
-        StartCombat();
+    private void StartCombat()
+    {
+        turnPanel.SetActive(true);
+        attackPanel.SetActive(false);
+        playerTurn = true;
+        turn++;
+        Debug.Log("Turn" + turn);
+
+        foreach (CharacterInfo character in characters)
+        {
+            MouseController.Instance.SetCharacter(character);
+            MouseController.Instance.PositionCharacterOnTile(character, character.activeTile);
+            character.canMove = true;
+            character.canAct = false;
+        }
+        activeCharacter = 0;
+
+        UpdateUI();
     }
 
     private void NextCharacter()
     {
-        MouseController.Instance.HideRangeTiles();
-        MouseController.Instance.HideAttackRangeTiles();
         ClearAttackMenu();
 
         int initialIndex = activeCharacter;
@@ -185,8 +194,6 @@ public class TurnManager : MonoBehaviour
 
     private void PreviousCharacter()
     {
-        MouseController.Instance.HideRangeTiles();
-        MouseController.Instance.HideAttackRangeTiles();
         ClearAttackMenu();
 
         int initialIndex = activeCharacter;
@@ -244,6 +251,7 @@ public class TurnManager : MonoBehaviour
         {
             btn = Instantiate(attackBtn);
             btn.transform.SetParent(attackPanel.transform);
+            btn.transform.localScale = Vector3.one;
             btn.onClick.AddListener(Back);
             btn.GetComponentInChildren<TMP_Text>().text = attack.attackName;
             buttons.Add(btn);
@@ -252,6 +260,8 @@ public class TurnManager : MonoBehaviour
 
     private void ClearAttackMenu()
     {
+        MouseController.Instance.HideRangeTiles();
+        MouseController.Instance.HideAttackRangeTiles();
         if (buttons != null)
         {
             foreach (Button btn in buttons)
@@ -272,5 +282,22 @@ public class TurnManager : MonoBehaviour
             MouseController.Instance.GetInRangeTiles();
         else
             MouseController.Instance.GetInAttackRangeTiles(characters[activeCharacter].activeTile);
+    }
+
+    private void CheckGameOver()
+    {
+        if (characters.Count == 0 && !gameOver)
+        {
+            ClearAttackMenu();
+            Debug.Log("Game Over");
+            gameOver = true;
+        }
+
+        if (enemies.Count == 0 && !gameOver)
+        {
+            ClearAttackMenu();
+            Debug.Log("Winner");
+            gameOver = true;
+        }
     }
 }

@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour
     public float moveSpeed = 3f;
 
     private bool turnActive = false;
+    private bool isMoving = false;
 
     public int expReward = 100;
 
@@ -16,6 +17,14 @@ public class EnemyAI : MonoBehaviour
     {
         if (enemyCharacter == null)
             enemyCharacter = GetComponent<CharacterInfo>();
+    }
+
+    private void Update()
+    {
+        if (isMoving && !TurnManager.Instance.playerTurn)
+        {
+            FindAnyObjectByType<Camera>().transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+        }
     }
 
     public void TakeTurn()
@@ -98,6 +107,7 @@ public class EnemyAI : MonoBehaviour
         // Moves until range limit
         while (GetManhattanDistance(enemyCharacter.activeTile, targetCharacter.activeTile) > attackRange && tilesMoved < enemyCharacter.range)
         {
+            isMoving = true;
             yield return MoveAlongPath(path);
             tilesMoved++;
 
@@ -157,7 +167,10 @@ public class EnemyAI : MonoBehaviour
     IEnumerator MoveAlongPath(List<OverlayTile> path)
     {
         if (path.Count == 0)
+        {
+            isMoving = false;
             yield break;
+        }
 
         OverlayTile nextTile = path[0];
         while (Vector2.Distance(enemyCharacter.transform.position, nextTile.transform.position) > 0.05f)
@@ -176,5 +189,6 @@ public class EnemyAI : MonoBehaviour
         enemyCharacter.canAct = false;
         Debug.Log(enemyCharacter.characterName + " ends its turn.");
         turnActive = false;
+        isMoving = false;
     }
 }

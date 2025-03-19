@@ -22,7 +22,7 @@ public class MouseController : MonoBehaviour
     public List<OverlayTile> inRangeTiles = new List<OverlayTile>();
     private List<OverlayTile> inAttackRangeTiles = new List<OverlayTile>();
 
-    private bool isMoving = false;
+    public bool isMoving = false;
 
     private void Awake()
     {
@@ -52,6 +52,10 @@ public class MouseController : MonoBehaviour
         if(focusedTileHit.HasValue)
         {
             OverlayTile overlayTile = focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
+
+            if (overlayTile == null)
+                return;
+
             transform.position = new Vector3(overlayTile.transform.position.x, overlayTile.transform.position.y, overlayTile.transform.position.z-1);
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder;
 
@@ -78,7 +82,7 @@ public class MouseController : MonoBehaviour
                 
             }
 
-            if (Input.GetMouseButtonDown(0) && inRangeTiles.Contains(overlayTile))
+            if (Input.GetMouseButtonDown(0) && inRangeTiles.Contains(overlayTile) && character.canMove)
             {
                 /*if (character == null)
                 {
@@ -91,12 +95,16 @@ public class MouseController : MonoBehaviour
                     if(inRangeTiles.Contains(overlayTile))
                         isMoving = true;
                 }*/
+
                 isMoving = true;
                 character.canAct = true;
             }
 
             if (Input.GetMouseButtonDown(0) && inAttackRangeTiles.Contains(overlayTile))
             {
+                if (overlayTile.collisionGO == null)
+                    return;
+
                 //Debug.Log(character.name+" attacks "+overlayTile.collisionGO.name);
                 if (overlayTile.collisionGO.GetComponent<CharacterInfo>() != null)
                 {
@@ -114,6 +122,7 @@ public class MouseController : MonoBehaviour
         if(path.Count > 0 && isMoving)
         {
             MoveAlongPath();
+            FindAnyObjectByType<Camera>().transform.position = new Vector3(character.transform.position.x, character.transform.position.y, -10);
         }
     }
 
