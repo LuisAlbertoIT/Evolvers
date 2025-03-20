@@ -6,6 +6,7 @@ public class SpawnCharacter : MonoBehaviour
     public List<GameObject> personajes; // Lista de personajes para spawnear
     public Camera mainCamera; // Cámara principal
     private List<Collider2D> zonasOcupadas = new List<Collider2D>(); // Lista de zonas ocupadas
+    public GameObject ActivadorTurnManager;
 
     void Start()
     {
@@ -28,7 +29,13 @@ public class SpawnCharacter : MonoBehaviour
         if (personajes.Count == 0) // Verificar si todavía hay personajes disponibles
         {
             Debug.Log("Todos los personajes ya han sido spawneados.");
+
+            if (ActivadorTurnManager != null)
+            {
+                ActivadorTurnManager.SetActive(true); // Activar el GameObject al terminar
+            } 
             return;
+
         }
 
         Vector3 mousePosition = Input.mousePosition;

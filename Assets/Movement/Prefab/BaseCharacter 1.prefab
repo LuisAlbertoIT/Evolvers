@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 1852147660176014058}
   m_Layer: 0
   m_Name: BaseCharacter 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,6 +191,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTile: {fileID: 0}
+  characterName: 
+  maxHP: 100
+  currentHP: 0
+  attack: 10
+  defense: 5
+  range: 3
+  level: 1
+  currentEXP: 0
+  expToNextLevel: 100
+  attacks: []
+  activeAtk: 
+  canMove: 1
+  canAct: 1
 --- !u!61 &7913053143652596885
 BoxCollider2D:
   m_ObjectHideFlags: 0
