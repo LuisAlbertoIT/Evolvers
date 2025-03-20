@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterInfo : MonoBehaviour
 {
     public OverlayTile activeTile;
+
+    [Header("Identification")]
+    public string ID;
 
     [Header("Basic Stats")]
     public string characterName;
@@ -30,6 +35,14 @@ public class CharacterInfo : MonoBehaviour
     public bool canAct = true;
 
 
+    private void Awake()
+    {
+        // Si uniqueID no está asignado, se genera uno nuevo.
+        if (string.IsNullOrEmpty(ID))
+        {
+            ID = Guid.NewGuid().ToString();
+        }
+    }
 
     void Start()
     {
@@ -86,10 +99,10 @@ public class CharacterInfo : MonoBehaviour
         currentEXP -= expToNextLevel;
         expToNextLevel = Mathf.RoundToInt(expToNextLevel * 1.5f);
 
-        maxHP += Random.Range(10,30);
+        maxHP += UnityEngine.Random.Range(10,30);
         currentHP = maxHP;
-        attack += Random.Range(0, 2); ;
-        defense += Random.Range(0, 4); ;
+        attack += UnityEngine.Random.Range(0, 2); ;
+        defense += UnityEngine.Random.Range(0, 4); ;
 
         Debug.Log($"{characterName} leveled up to Level {level}! HP: {maxHP}, Attack: {attack}, Defense: {defense}");
     }

@@ -7,12 +7,41 @@ public class SpawnCharacter : MonoBehaviour
     public Camera mainCamera; // Cámara principal
     private List<Collider2D> zonasOcupadas = new List<Collider2D>(); // Lista de zonas ocupadas
     public GameObject ActivadorTurnManager;
+    public GameObject creaturePrefab;
 
     void Start()
     {
         if (mainCamera == null)
         {
             mainCamera = Camera.main; // Obtener la cámara principal si no se asigna
+        }
+
+        List<CharacterData> loadedData = SaveManager.LoadGame();
+        if (loadedData != null && loadedData.Count > 0)
+        {
+            foreach (CharacterData data in loadedData)
+            {
+                GameObject newCreature = Instantiate(creaturePrefab);
+                CharacterInfo characterInfo = newCreature.GetComponent<CharacterInfo>();
+
+                if (characterInfo != null)
+                {
+                    characterInfo.ID = data.ID;
+                    characterInfo.characterName = data.characterName;
+                    characterInfo.maxHP = data.maxHP;
+                    characterInfo.currentHP = data.currentHP;
+                    characterInfo.attack = data.attack;
+                    characterInfo.defense = data.defense;
+                    characterInfo.level = data.level;
+
+                    personajes.Add(newCreature);
+                    newCreature.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No hay personajes guardados, asegúrate de que se haya guardado al menos uno.");
         }
     }
 

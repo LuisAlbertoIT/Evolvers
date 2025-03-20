@@ -3641,11 +3641,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc50bc1cad84a04597a746fe52d8636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  personajes:
-  - {fileID: 6745136132432405549, guid: 99dbb2f7a04701e46a68d69108b74cb7, type: 3}
-  - {fileID: 6745136132432405549, guid: 08dfff437ea474f499214a51aa8ffece, type: 3}
+  personajes: []
   mainCamera: {fileID: 0}
   ActivadorTurnManager: {fileID: 1251270124}
+  creaturePrefab: {fileID: 6745136132432405549, guid: 99dbb2f7a04701e46a68d69108b74cb7, type: 3}
 --- !u!4 &1451825240
 Transform:
   m_ObjectHideFlags: 0
@@ -11500,7 +11499,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.35875002, y: 0.37133062}
   m_AnchorMax: {x: 0.64125, y: 0.5222232}
-  m_AnchoredPosition: {x: 0, y: 3.9999466}
+  m_AnchoredPosition: {x: 0, y: 3.999939}
   m_SizeDelta: {x: -66, y: -24}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1907863254
