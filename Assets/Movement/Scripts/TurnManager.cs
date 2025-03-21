@@ -28,6 +28,8 @@ public class TurnManager : MonoBehaviour
     private Button btn;
     public List<Button> buttons;
     private bool gameOver = false;
+    public GameObject ZoneSpawner;
+    
 
     private void Awake()
     {
@@ -63,8 +65,14 @@ public class TurnManager : MonoBehaviour
         {
             if (turn == 0)
             {
+
                 if (Input.GetKeyDown(KeyCode.Space))
+                {
                     StartCombat();
+
+                }
+                    
+                
             }
             
             if (playerTurn)

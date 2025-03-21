@@ -1140,7 +1140,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -4119988391040486372, guid: 99d24fd3c6593d64aaf35b83601295a1, type: 3}
   m_Color: {r: 0.028301716, g: 0.2811726, b: 1, a: 0.6117647}
   m_FlipX: 0
@@ -1912,7 +1912,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -4119988391040486372, guid: 99d24fd3c6593d64aaf35b83601295a1, type: 3}
   m_Color: {r: 0.028301716, g: 0.2811726, b: 1, a: 0.6117647}
   m_FlipX: 0
@@ -2157,7 +2157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.35875002, y: 0.5222232}
   m_AnchorMax: {x: 0.64125, y: 0.651}
-  m_AnchoredPosition: {x: 0, y: 0.9999466}
+  m_AnchoredPosition: {x: 0, y: 0.99993896}
   m_SizeDelta: {x: -66, y: -14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &841999949
@@ -2772,7 +2772,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -4119988391040486372, guid: 99d24fd3c6593d64aaf35b83601295a1, type: 3}
   m_Color: {r: 0.028301716, g: 0.2811726, b: 1, a: 0.6117647}
   m_FlipX: 0
@@ -3252,6 +3252,7 @@ MonoBehaviour:
   turnPanel: {fileID: 1730544846}
   attackPanel: {fileID: 805912623}
   buttons: []
+  ZoneSpawner: {fileID: 1451825238}
 --- !u!4 &1251270127
 Transform:
   m_ObjectHideFlags: 0
@@ -3623,7 +3624,7 @@ GameObject:
   - component: {fileID: 1451825240}
   - component: {fileID: 1451825239}
   m_Layer: 0
-  m_Name: Zona
+  m_Name: ZonaSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4608,7 +4609,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -11500,7 +11501,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.35875002, y: 0.37133062}
   m_AnchorMax: {x: 0.64125, y: 0.5222232}
-  m_AnchoredPosition: {x: 0, y: 3.9999466}
+  m_AnchoredPosition: {x: 0, y: 3.999939}
   m_SizeDelta: {x: -66, y: -24}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1907863254

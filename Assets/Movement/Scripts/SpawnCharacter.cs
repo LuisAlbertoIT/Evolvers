@@ -21,7 +21,11 @@ public class SpawnCharacter : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) // Detectar clic izquierdo del mouse
         {
             SpawnPersonaje();
+
         }
+       
+
+
     }
 
     void SpawnPersonaje()
