@@ -17,6 +17,7 @@ public class Criatura : MonoBehaviour
     public int Vitalidad;
     public int Vigor;
     public int Fuerza;
+    public int resistencia;
     public int Adaptabilidad;
     public int Inteligencia;
     public int Velocidad;
@@ -25,7 +26,7 @@ public class Criatura : MonoBehaviour
     public SpriteRenderer[] sprites; // Sprites de la criatura (Ojos, Cuerpo, etc.)
     public List<TraitBase> traits = new List<TraitBase>(); // Traits que afectan su comportamiento
 
-    public Criatura(string nombre, int vida, int vidaMax, int energia, int energiaMax, int acciones, int accionesMax, int vitalidad, int vigor, int fuerza, int adaptabilidad, int inteligencia, int velocidad, int metabolismo, SpriteRenderer[] sprites, TraitBase[] traits)
+    public Criatura(string nombre, int vida, int vidaMax, int energia, int energiaMax, int acciones, int accionesMax, int vitalidad, int vigor, int fuerza,  int adaptabilidad, int inteligencia, int velocidad, int metabolismo, SpriteRenderer[] sprites, TraitBase[] traits, int resistencia)
     {
         this.Nombre = nombre;
         this.Vida = vida;
@@ -43,6 +44,7 @@ public class Criatura : MonoBehaviour
         this.Metabolismo = metabolismo;
         this.traits.AddRange(traits);
         this.sprites = sprites;
+        this.resistencia = resistencia;
     }
 
     public void AddTrait(TraitBase trait)
