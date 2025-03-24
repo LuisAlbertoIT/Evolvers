@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public void AgregarCriatura(Criatura criatura)
     {
         listaCriaturas.Add(criatura);
+        DontDestroyOnLoad(criatura.gameObject);
     }
 
     // Método para enviar una criatura a la expedición
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         {
             listaCriaturas.Remove(criatura);
             listaExpedicion.Add(criatura);
+            DontDestroyOnLoad(criatura.gameObject);
         }
     }
 
@@ -44,6 +46,21 @@ public class GameManager : MonoBehaviour
         {
             listaExpedicion.Remove(criatura);
             listaCriaturas.Add(criatura);
+            DontDestroyOnLoad(criatura.gameObject);
+        }
+    }
+
+    // Método para desactivar todas las criaturas en la próxima escena
+    public void DesactivarCriaturasEnProximaEscena()
+    {
+        foreach (var criatura in listaCriaturas)
+        {
+            criatura.gameObject.SetActive(false);
+        }
+
+        foreach (var criatura in listaExpedicion)
+        {
+            criatura.gameObject.SetActive(false);
         }
     }
 }

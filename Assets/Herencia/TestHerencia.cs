@@ -14,7 +14,7 @@ public class TestHerencia : MonoBehaviour
 
         Debug.Log($"Criatura Hija: Fuerza {child.Fuerza}, Velocidad {child.Velocidad}, Inteligencia {child.Inteligencia}, Vitalidad {child.Vitalidad}, Vigor {child.Adaptabilidad}, Metabolismo {child.Metabolismo}");
         Debug.Log("Traits Heredados:");
-        foreach (var trait in child.Traits)
+        foreach (var trait in child.traits)
         {
             Debug.Log(trait.GetType().Name);
         }

@@ -36,15 +36,15 @@ public static class GeneticsSystem
         child.Acciones = child.AccionesMax;
 
         // Herencia de traits (50% de probabilidad por cada trait)
-        foreach (TraitBase trait in parent1.Traits)
+        foreach (TraitBase trait in parent1.traits)
         {
             if (Random.value < 0.5f)
                 child.AddTrait(childObject.AddComponent(trait.GetType()) as TraitBase);
         }
 
-        foreach (TraitBase trait in parent2.Traits)
+        foreach (TraitBase trait in parent2.traits)
         {
-            if (Random.value < 0.5f && !child.Traits.Exists(t => t.GetType() == trait.GetType()))
+            if (Random.value < 0.5f && !child.traits.Exists(t => t.GetType() == trait.GetType()))
                 child.AddTrait(childObject.AddComponent(trait.GetType()) as TraitBase);
         }
 
@@ -53,7 +53,7 @@ public static class GeneticsSystem
         if (Random.value < 0.1f)
         {
             System.Type mutation = possibleMutations[Random.Range(0, possibleMutations.Count)];
-            if (!child.Traits.Exists(t => t.GetType() == mutation))
+            if (!child.traits.Exists(t => t.GetType() == mutation))
                 child.AddTrait(childObject.AddComponent(mutation) as TraitBase);
         }
 

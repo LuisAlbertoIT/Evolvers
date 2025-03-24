@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SceneasPrototipo/Battle.unity
     guid: 39953e8f0d2bbba4985d32148dcad89a
+  - enabled: 1
+    path: Assets/Manejo de criaturas/Testmanejo2.unity
+    guid: 1e39776d8bffd054888a0cdaa4a4d60b
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
