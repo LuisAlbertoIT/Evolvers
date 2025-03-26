@@ -13,18 +13,15 @@ public class BattleManeger : MonoBehaviour
     public GameObject[] enemies;
     public bool enemyEndTurn;
     private bool enemyTurnActive = false;
+    public GameObject playerTarget;
 
+   
 
-    public GameObject playerTarget; // Añadir esta línea
+    void Update()
 
-    private void Awake()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-    }
-
-    void Update()
-    {
         if (!enemyTurnActive)
         {
             CheckPlayerTurn();
@@ -97,7 +94,6 @@ public class BattleManeger : MonoBehaviour
     public void PlayerSelect(GameObject playerSelect)
     {
         PlayerActive = playerSelect;
-
     }
 
     public void PlayerDeSelect()
@@ -108,6 +104,7 @@ public class BattleManeger : MonoBehaviour
             PlayerActive = null;
         }
     }
+
     public void PlayerToPlayerSelect(GameObject playerSelect)
     {
         playerTarget = playerSelect;
@@ -144,13 +141,17 @@ public class BattleManeger : MonoBehaviour
         if (players.Length == 0)
         {
             Debug.Log("Game Over");
+            this.enabled = false; // Desactivar script cuando el juego termina
         }
 
         if (enemies.Length == 0)
         {
             Debug.Log("Winner");
-        }
-    }
+            this.enabled = false;
 
+
+        }
+    
+    } 
 
 }

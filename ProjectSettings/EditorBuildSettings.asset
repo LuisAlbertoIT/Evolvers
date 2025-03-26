@@ -6,19 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SceneasPrototipo/MainMenu.unity
-    guid: a2f578d47867ce94db84c114e8090b20
+    path: Assets/Scenes/Casa1.unity
+    guid: 2e3ba564ee844564fb3eca76f332a9f8
   - enabled: 1
-    path: Assets/Scenes/SceneasPrototipo/Base.unity
-    guid: 5bee707151e074c4a92b8ab7315c593f
+    path: Assets/Scenes/Exploracion.unity
+    guid: b2652e15969a4f5428f2f38b15025dd0
   - enabled: 1
-    path: Assets/Scenes/SceneasPrototipo/Mapa mundi.unity
-    guid: de44a8292158b9144a574cdf194a2c39
+    path: Assets/Scenes/Casa2.unity
+    guid: b19a9d4a93b747c408fab7c775a6e99c
   - enabled: 1
-    path: Assets/Scenes/SceneasPrototipo/Battle.unity
-    guid: 39953e8f0d2bbba4985d32148dcad89a
-  - enabled: 1
-    path: Assets/Manejo de criaturas/Testmanejo2.unity
-    guid: 1e39776d8bffd054888a0cdaa4a4d60b
+    path: Assets/Scenes/Casa3.unity
+    guid: 42b22c42dd284b44684e5a1b652e6da2
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ChangeSceneOnCollider : MonoBehaviour
 {
-    [SerializeField] private string sceneName;
+    [SerializeField] public string sceneName;
 
     void OnTriggerEnter2D(Collider2D other)
     {
