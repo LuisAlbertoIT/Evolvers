@@ -7,10 +7,7 @@ TagManager:
   - Enemy
   - TileArea
   - weapon
-<<<<<<< Updated upstream
   - Item
-=======
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
