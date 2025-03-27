@@ -21,6 +21,7 @@ public class CameraEscena : MonoBehaviour
     void Start()
     {
         player = FindAnyObjectByType<Movimiento>()?.transform;
+        SetCameraFirstPosition();
 
         if (player == null)
         {
@@ -62,6 +63,15 @@ public class CameraEscena : MonoBehaviour
             cameraDestination = transform.position - new Vector3(xMovement, 0, 0);
             StartCoroutine(MoveCamera());
         }
+    }
+
+    private void SetCameraFirstPosition()
+    {
+        float x = Mathf.Round(player.position.x / xMovement) * xMovement;
+        float y = Mathf.Round(player.position.y / yMovement) * yMovement;
+
+        transform.position = new Vector3(x,y, transform.position.z);
+        cameraDestination = transform.position;
     }
 
     IEnumerator MoveCamera()

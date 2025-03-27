@@ -9,6 +9,11 @@ public class Movimiento : MonoBehaviour
     Animator animator;
 
     bool isAttacking;
+
+    private void Awake()
+    {
+        transform.position = DataInstance.Instance.playerPosition;
+    }
     private void Start()
     {
         rigidbodyTopDown = GetComponent<Rigidbody2D>();

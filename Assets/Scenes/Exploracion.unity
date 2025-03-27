@@ -27783,10 +27783,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 664484262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a1adc0308cf0614facae1985ad8ab9d, type: 3}
+  m_Script: {fileID: 11500000, guid: d59eb990089e18d45b53429591760f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Casa3
+  sceneIndex: 1
+  playerDestination: {x: -20, y: -4.5}
 --- !u!1 &666571107
 GameObject:
   m_ObjectHideFlags: 0
@@ -27804,7 +27805,7 @@ GameObject:
   - component: {fileID: 666571114}
   m_Layer: 0
   m_Name: character
-  m_TagString: Finish
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28493,10 +28494,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 812381299}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a1adc0308cf0614facae1985ad8ab9d, type: 3}
+  m_Script: {fileID: 11500000, guid: d59eb990089e18d45b53429591760f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Casa2
+  sceneIndex: 1
+  playerDestination: {x: 0, y: -4.5}
 --- !u!1 &819304315
 GameObject:
   m_ObjectHideFlags: 0
@@ -30289,10 +30291,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1528929496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a1adc0308cf0614facae1985ad8ab9d, type: 3}
+  m_Script: {fileID: 11500000, guid: d59eb990089e18d45b53429591760f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Casa1
+  sceneIndex: 1
+  playerDestination: {x: 20, y: -4.5}
 --- !u!1 &1536093105
 GameObject:
   m_ObjectHideFlags: 0
@@ -32825,7 +32828,7 @@ SceneRoots:
   - {fileID: 104235735}
   - {fileID: 666571111}
   - {fileID: 846225866}
-  - {fileID: 1381691602}
   - {fileID: 558582511}
   - {fileID: 1602138848}
   - {fileID: 1874866199}
+  - {fileID: 1381691602}
