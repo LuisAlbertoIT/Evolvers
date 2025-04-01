@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Criatura : MonoBehaviour
 {
-    [SerializeField] string Nombre;
+    public string Nombre;
     public int Vida;
     public int VidaMax;
 
