@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     public List<Criatura> listaCriaturas = new List<Criatura>();  // Criaturas que posees
     public List<Criatura> listaExpedicion = new List<Criatura>(); // Criaturas en expedición
+    public List<Criatura> listaSinIncubar = new List<Criatura>(); // Criaturas sin incubar
 
     private void Awake()
     {

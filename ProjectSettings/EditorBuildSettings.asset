@@ -6,9 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/SceneasPrototipo/MainMenu.unity
+    guid: a2f578d47867ce94db84c114e8090b20
+  - enabled: 1
+    path: Assets/Scenes/SceneasPrototipo/Base.unity
+    guid: 5bee707151e074c4a92b8ab7315c593f
+  - enabled: 1
+    path: Assets/Scenes/SceneasPrototipo/Mapa mundi.unity
+    guid: de44a8292158b9144a574cdf194a2c39
+  - enabled: 1
+    path: Assets/Scenes/SceneasPrototipo/Battle.unity
+    guid: 39953e8f0d2bbba4985d32148dcad89a
+  - enabled: 0
     path: Assets/Scenes/Exploracion.unity
     guid: b2652e15969a4f5428f2f38b15025dd0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Casa1.unity
     guid: 2e3ba564ee844564fb3eca76f332a9f8
   - enabled: 0
