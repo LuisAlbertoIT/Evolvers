@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Criatura : MonoBehaviour
 {
-    public string Nombre;
+    public string Nombre = "SinNombre";
     public int Vida;
     public int VidaMax;
 
@@ -28,20 +28,20 @@ public class Criatura : MonoBehaviour
 
     public Criatura(string nombre, int vida, int vidaMax, int energia, int energiaMax, int acciones, int accionesMax, int vitalidad, int vigor, int fuerza,  int adaptabilidad, int inteligencia, int velocidad, int metabolismo, SpriteRenderer[] sprites, TraitBase[] traits, int resistencia)
     {
-        this.Nombre = nombre;
-        this.Vida = vida;
-        this.VidaMax = vidaMax;
-        this.Energia = energia;
-        this.EnergiaMax = energiaMax;
-        this.Acciones = acciones;
-        this.AccionesMax = accionesMax;
-        this.Vitalidad = vitalidad;
-        this.Vigor = vigor;
-        this.Fuerza = fuerza;
-        this.Adaptabilidad = adaptabilidad;
-        this.Inteligencia = inteligencia;
-        this.Velocidad = velocidad;
-        this.Metabolismo = metabolismo;
+        Nombre = nombre;
+        Vida = vida;
+        VidaMax = vidaMax;
+        Energia = energia;
+        EnergiaMax = energiaMax;
+        Acciones = acciones;
+        AccionesMax = accionesMax;
+        Vitalidad = vitalidad;
+        Vigor = vigor;
+        Fuerza = fuerza;
+        Adaptabilidad = adaptabilidad;
+        Inteligencia = inteligencia;
+        Velocidad = velocidad;
+        Metabolismo = metabolismo;
         this.traits.AddRange(traits);
         this.sprites = sprites;
         this.resistencia = resistencia;

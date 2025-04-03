@@ -12,6 +12,10 @@ public class Incubar : MonoBehaviour
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
+    }
+
+    public void EsperarIncubacion()
+    {
         StartCoroutine(IncubarCriatura());
     }
 

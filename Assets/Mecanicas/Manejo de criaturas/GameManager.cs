@@ -7,7 +7,24 @@ public class GameManager : MonoBehaviour
 
     public List<Criatura> listaCriaturas = new List<Criatura>();  // Criaturas que posees
     public List<Criatura> listaExpedicion = new List<Criatura>(); // Criaturas en expedición
-    public List<Criatura> listaSinIncubar = new List<Criatura>(); // Criaturas sin incubar
+    public List<Criatura> listaSinIncubar = new List<Criatura>(); // Método para agregar una criatura a la lista de criaturas sin incubar
+   
+    public void AgregarCriaturaSinIncubar(Criatura criatura)
+    {
+        listaSinIncubar.Add(criatura);
+        DontDestroyOnLoad(criatura.gameObject);
+    }
+
+    // Método para incubar una criatura y moverla a la lista de criaturas poseídas
+    public void IncubarCriatura(Criatura criatura)
+    {
+        if (listaSinIncubar.Contains(criatura))
+        {
+            listaSinIncubar.Remove(criatura);
+            listaCriaturas.Add(criatura);
+            DontDestroyOnLoad(criatura.gameObject);
+        }
+    }
 
     private void Awake()
     {
@@ -15,6 +32,7 @@ public class GameManager : MonoBehaviour
         {
             instancia = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("GameManager inicializado correctamente.");
         }
         else
         {
