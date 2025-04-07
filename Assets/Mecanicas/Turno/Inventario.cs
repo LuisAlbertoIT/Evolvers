@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -36,6 +36,7 @@ public class Inventario : MonoBehaviour
                 }
             }
         }
+
     }
 
     public void navegar()
@@ -50,7 +51,7 @@ public class Inventario : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.W))
                 {
                     ID_equipar--;
-                    if (ID_equipar < 0) ID_equipar = 0; // Validación para evitar índices negativos
+                    if (ID_equipar < 0) ID_equipar = 0; // ValidaciÃ³n para evitar Ã­ndices negativos
                 }
                 if (Input.GetKeyDown(KeyCode.S) && ID_equipar < Equipar.Count - 1)
                 {

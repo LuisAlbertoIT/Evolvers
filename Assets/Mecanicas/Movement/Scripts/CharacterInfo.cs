@@ -31,12 +31,17 @@ public class CharacterInfo : MonoBehaviour
 
 
 
+    public InventoryItem[] inventory = new InventoryItem[16];
+
+
     void Start()
     {
         currentHP = maxHP;
         attacks.Add(gameObject.AddComponent<Attacks>().StandardAttack());
         activeAtk = attacks[0].attackName;
         attacks.Add(gameObject.AddComponent<Attacks>().AcidSpit());
+
+        
     }
 
     public void TakeDamage(int damage, CharacterInfo attacker)
