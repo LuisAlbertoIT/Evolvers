@@ -1,13 +1,13 @@
+
 ﻿using NUnit.Framework;
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.PlasticSCM.Editor.WebApi;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
+
 
 public class TurnManager : MonoBehaviour
 {
@@ -67,6 +67,8 @@ public class TurnManager : MonoBehaviour
             else
                 enemies.Add(character);
         }
+        currentCharacter = characters[activeCharacter]; // ✅ Agregado para evitar NullReference
+
         if (Input.GetKeyDown(KeyCode.KeypadEnter) && playerTurn)
         {
             OpenInventory();
@@ -77,8 +79,8 @@ public class TurnManager : MonoBehaviour
         for (int i = 0; i < currentCharacter.inventory.Length; i++)
         {
             var item = currentCharacter.inventory[i];
-            if (item != null)
-                Debug.Log($"Slot {i}: {item.itemName}");
+            if (item != null) ;
+                
         }
     }
 
