@@ -17,7 +17,7 @@ public class Criatura : MonoBehaviour
     public int Vitalidad;
     public int Vigor;
     public int Fuerza;
-    public int resistencia;
+    public int Resistencia;
     public int Adaptabilidad;
     public int Inteligencia;
     public int Velocidad;
@@ -42,9 +42,10 @@ public class Criatura : MonoBehaviour
         Inteligencia = inteligencia;
         Velocidad = velocidad;
         Metabolismo = metabolismo;
+        Resistencia = resistencia;
         this.traits.AddRange(traits);
         this.sprites = sprites;
-        this.resistencia = resistencia;
+        
     }
 
     public void AddTrait(TraitBase trait)
