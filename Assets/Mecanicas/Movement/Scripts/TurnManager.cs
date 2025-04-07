@@ -1,15 +1,13 @@
-<<<<<<< HEAD
 ﻿using NUnit.Framework;
-=======
-
->>>>>>> 9db91e53e17d424cb462da59fdaf7f832b9e0fe8
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class TurnManager : MonoBehaviour
 {
