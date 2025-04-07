@@ -39,7 +39,7 @@ public class Incubar : MonoBehaviour
             nuevaCriaturaComponent.Vitalidad = criaturaSinIncubar.Vitalidad;
             nuevaCriaturaComponent.Vigor = criaturaSinIncubar.Vigor;
             nuevaCriaturaComponent.Fuerza = criaturaSinIncubar.Fuerza;
-            nuevaCriaturaComponent.resistencia = criaturaSinIncubar.resistencia;
+            nuevaCriaturaComponent.Resistencia = criaturaSinIncubar.Resistencia;
             nuevaCriaturaComponent.Adaptabilidad = criaturaSinIncubar.Adaptabilidad;
             nuevaCriaturaComponent.Inteligencia = criaturaSinIncubar.Inteligencia;
             nuevaCriaturaComponent.Velocidad = criaturaSinIncubar.Velocidad;
