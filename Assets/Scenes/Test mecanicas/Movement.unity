@@ -370,6 +370,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: aca2d7ea683ab9e489dfc42c8fcf9f9e, type: 3}
   - {fileID: 21300000, guid: d28ed871930e95f499c468c55b2b8c00, type: 3}
   opcionSeleccionada: 0
+  inventarioGlobal: {fileID: 11400000, guid: ec08499f70329a8438e990cc362c2ee6, type: 2}
 --- !u!4 &128458314
 Transform:
   m_ObjectHideFlags: 0
@@ -398,6 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nombreEscena: 
+  transitionTime: 1
 --- !u!1 &135590416
 GameObject:
   m_ObjectHideFlags: 0

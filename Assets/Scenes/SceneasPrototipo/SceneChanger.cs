@@ -23,7 +23,7 @@ public class SceneChanger : MonoBehaviour
 
     public void EnviarCriaturasAEscena(string nombreEscena)
     {
-       
+      
         DontDestroyOnLoad(GameManager.instancia.gameObject);
         SceneManager.LoadScene(nombreEscena);
     }

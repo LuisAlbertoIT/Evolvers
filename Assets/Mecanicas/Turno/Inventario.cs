@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -21,22 +22,38 @@ public class Inventario : MonoBehaviour
     public Sprite[] Seleccion_Sprite;
     public int ID_Selecion;
 
+    public InventarioGlobal inventarioGlobal; // asignar en inspector
+    private void Start()
+    {
+        inventarioGlobal.OnInventarioChanged.AddListener(ActualizarVisual);
+        ActualizarVisual();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Item"))
         {
-            for (int i = 0; i < Bag.Count; i++)
-            {
-                if (Bag[i].GetComponent<UnityEngine.UI.Image>().enabled == false)
-                {
-                    Bag[i].GetComponent<UnityEngine.UI.Image>().enabled = true;
-                    Bag[i].GetComponent<UnityEngine.UI.Image>().sprite = collision.GetComponent<SpriteRenderer>().sprite;
-                    Destroy(collision.gameObject);
-                    break;
-                }
-            }
+            Sprite itemSprite = collision.GetComponent<SpriteRenderer>().sprite;
+            inventarioGlobal.AgregarItem(itemSprite); // ✅ agrega al global
+            Destroy(collision.gameObject);
         }
 
+    }
+
+    void ActualizarVisual()
+    {
+        for (int i = 0; i < Bag.Count; i++)
+        {
+            if (i < inventarioGlobal.itemIcons.Count)
+            {
+                Bag[i].GetComponent<UnityEngine.UI.Image>().sprite = inventarioGlobal.itemIcons[i];
+                Bag[i].GetComponent<UnityEngine.UI.Image>().enabled = true;
+            }
+            else
+            {
+                Bag[i].GetComponent<UnityEngine.UI.Image>().sprite = null;
+                Bag[i].GetComponent<UnityEngine.UI.Image>().enabled = false;
+            }
+        }
     }
 
     public void navegar()
@@ -166,6 +183,15 @@ public class Inventario : MonoBehaviour
 
                         if (Input.GetKeyDown(KeyCode.F) && ID >= 0 && ID < Bag.Count)
                         {
+                            // 🔴 Verificamos que haya un sprite válido
+                            Sprite icono = Bag[ID].GetComponent<UnityEngine.UI.Image>().sprite;
+
+                            if (icono != null)
+                            {
+                                inventarioGlobal.QuitarItem(icono); // ✅ Esto elimina del inventario global real
+                            }
+
+                            // 🔁 Limpiamos visualmente el slot
                             Bag[ID].GetComponent<UnityEngine.UI.Image>().sprite = null;
                             Bag[ID].GetComponent<UnityEngine.UI.Image>().enabled = false;
 
@@ -177,9 +203,7 @@ public class Inventario : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-    }
+    
 
     // Update is called once per frame
     void Update()

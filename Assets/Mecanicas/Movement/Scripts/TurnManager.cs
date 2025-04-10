@@ -44,6 +44,8 @@ public class TurnManager : MonoBehaviour
     public Sprite[] seleccionSprites; // [0]=normal, [1]=seleccionado
     public int opcionSeleccionada = 0;
 
+    public InventarioGlobal inventarioGlobal; // asignar en inspector
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -60,6 +62,8 @@ public class TurnManager : MonoBehaviour
     void Start()
     {
         Debug.Log("Battle starts!");
+        inventarioGlobal.OnInventarioChanged.AddListener(ActualizarVisual);
+
         foreach (var character in FindObjectsByType<CharacterInfo>(FindObjectsSortMode.None))
         {
             if(character.CompareTag("Player"))
@@ -79,8 +83,7 @@ public class TurnManager : MonoBehaviour
         for (int i = 0; i < currentCharacter.inventory.Length; i++)
         {
             var item = currentCharacter.inventory[i];
-            if (item != null) ;
-                
+         
         }
     }
 
@@ -93,7 +96,7 @@ public class TurnManager : MonoBehaviour
         {
             switch (inventoryState)
             {
-                case 0: // 🔹 Navegando por inventario
+                case 0: //Navegando por inventario
                     if (Input.GetKeyDown(KeyCode.D))
                         selectedSlotIndex = Mathf.Min(selectedSlotIndex + 1, inventorySlots.Count - 1);
                     if (Input.GetKeyDown(KeyCode.A))
@@ -131,7 +134,7 @@ public class TurnManager : MonoBehaviour
                     }
                     break;
 
-                case 1: // 🔸 Selección de acción (usar / eliminar)
+                case 1: // 🔸 Selección de acción (Seleccionar / eliminar)
                     if (Input.GetKeyDown(KeyCode.W))
                         opcionSeleccionada = Mathf.Max(opcionSeleccionada - 1, 0);
                     if (Input.GetKeyDown(KeyCode.S))
@@ -150,8 +153,15 @@ public class TurnManager : MonoBehaviour
                         }
                         else if (opcionSeleccionada == 1)
                         {
+                            if (selectedSlotIndex >= 0 && selectedSlotIndex < inventarioGlobal.itemIcons.Count)
+                            {
+                                Sprite iconoAEliminar = inventarioGlobal.itemIcons[selectedSlotIndex];
+                                inventarioGlobal.QuitarItem(iconoAEliminar); // 👈 esto lo saca de la lista global
+                            }
+
+                            // ✅ También eliminar del inventario del personaje (si corresponde)
                             currentCharacter.inventory[selectedSlotIndex] = null;
-                            UpdateInventoryVisuals();
+
                             currentCharacter.canAct = false;
                         }
 
@@ -434,23 +444,7 @@ public class TurnManager : MonoBehaviour
         inventoryState = 0;
         selector.transform.position = inventorySlots[selectedSlotIndex].transform.position;
 
-        currentCharacter = characters[activeCharacter];
-
-        for (int i = 0; i < inventorySlots.Count; i++)
-        {
-            var slotImage = inventorySlots[i];
-            var item = currentCharacter.inventory[i];
-
-            if (item != null && item.quantity > 0)
-            {
-                slotImage.sprite = item.icon;
-                slotImage.enabled = true;
-            }
-            else
-            {
-                slotImage.enabled = false;
-            }
-        }
+        ActualizarVisual();
     }
     public void CloseInventory()
     {
@@ -516,6 +510,21 @@ public class TurnManager : MonoBehaviour
             UpdateUI();
         }
     }
-
+    private void ActualizarVisual()
+    {
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (i < inventarioGlobal.itemIcons.Count)
+            {
+                inventorySlots[i].sprite = inventarioGlobal.itemIcons[i];
+                inventorySlots[i].enabled = true;
+            }
+            else
+            {
+                inventorySlots[i].sprite = null;
+                inventorySlots[i].enabled = false;
+            }
+        }
+    }
 
 }
