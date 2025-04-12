@@ -222,7 +222,7 @@ public class Inventario : MonoBehaviour
             Fase_Inventario = 0;
             inventario[0].SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             activar_inventario = !activar_inventario;
             Time.timeScale = 1f;
