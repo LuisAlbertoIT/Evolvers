@@ -31,7 +31,7 @@ public class TurnManager : MonoBehaviour
     public GameObject ZoneSpawner;
 
     public GameObject inventoryPanel;
-    public List<Image> inventorySlots = new List<Image>(); // Asignar en Inspector
+    public List<Image> inventorySlots = new List<Image>(); 
     private bool inventoryOpen = false;
 
     private CharacterInfo currentCharacter;
@@ -44,7 +44,7 @@ public class TurnManager : MonoBehaviour
     public Sprite[] seleccionSprites; // [0]=normal, [1]=seleccionado
     public int opcionSeleccionada = 0;
 
-    public InventarioGlobal inventarioGlobal; // asignar en inspector
+    public InventarioGlobal inventarioGlobal; 
 
     private void Awake()
     {
@@ -71,7 +71,15 @@ public class TurnManager : MonoBehaviour
             else
                 enemies.Add(character);
         }
-        currentCharacter = characters[activeCharacter]; // ✅ Agregado para evitar NullReference
+        currentCharacter = characters[activeCharacter];
+        foreach (CharacterInfo character in characters)
+        {
+            character.canMove = true;
+            character.canAct = true;
+
+            // Aquí restableces cualquier buff temporal al inicio del turno
+            character.ResetTemporaryAttackBuff();
+        }
 
         if (Input.GetKeyDown(KeyCode.KeypadEnter) && playerTurn)
         {
@@ -134,7 +142,7 @@ public class TurnManager : MonoBehaviour
                     }
                     break;
 
-                case 1: // 🔸 Selección de acción (Seleccionar / eliminar)
+                case 1: // Selección de acción (Seleccionar / eliminar)
                     if (Input.GetKeyDown(KeyCode.W))
                         opcionSeleccionada = Mathf.Max(opcionSeleccionada - 1, 0);
                     if (Input.GetKeyDown(KeyCode.S))
@@ -147,20 +155,58 @@ public class TurnManager : MonoBehaviour
 
                     if (Input.GetKeyDown(KeyCode.F))
                     {
-                        if (opcionSeleccionada == 0)
+                        if (opcionSeleccionada == 0) // Seleccionar (Agregar al personaje)
                         {
-                            UseItem(selectedSlotIndex); // Ya definido en tu clase
+                            if (selectedSlotIndex >= 0 && selectedSlotIndex < inventarioGlobal.itemIcons.Count)
+                            {
+                                Sprite itemSprite = inventarioGlobal.itemIcons[selectedSlotIndex];
+
+                                string nombreSprite = itemSprite.name;
+
+                                // 🔍 Detectar ítem por nombre del sprite
+                                if (nombreSprite == "Sprite-0002_0")
+                                {
+                                    currentCharacter.Heal(25);
+                                    Debug.Log($"{currentCharacter.characterName} fue curado con un Hongo Verde HP: {currentCharacter.currentHP}/{currentCharacter.maxHP}");
+                                    currentCharacter.canAct = false;
+                                }
+                                else if (nombreSprite == "Sprite-00002_0")
+                                {
+                                    currentCharacter.ApplyTemporaryAttackBuff(1);
+                                    Debug.Log($"{currentCharacter.characterName} ganó +5 de ataque con un Hongo Rojo. Ataque actual: {currentCharacter.attack}");
+                                }
+                                else
+                                {
+                                    Debug.Log("Ítem sin efecto conocido: " + nombreSprite);
+                                }
+
+
+                                inventarioGlobal.QuitarItem(itemSprite);
+
+                                // Reordenar inventario lógico del personaje
+                                for (int i = selectedSlotIndex; i < currentCharacter.inventory.Length - 1; i++)
+                                {
+                                    currentCharacter.inventory[i] = currentCharacter.inventory[i + 1];
+                                }
+                                currentCharacter.inventory[currentCharacter.inventory.Length - 1] = null;
+                            
+                                
+                            }
                         }
                         else if (opcionSeleccionada == 1)
                         {
                             if (selectedSlotIndex >= 0 && selectedSlotIndex < inventarioGlobal.itemIcons.Count)
                             {
                                 Sprite iconoAEliminar = inventarioGlobal.itemIcons[selectedSlotIndex];
-                                inventarioGlobal.QuitarItem(iconoAEliminar); // 👈 esto lo saca de la lista global
+                                inventarioGlobal.QuitarItem(iconoAEliminar); // 🔁 Esto reordena la lista visual
                             }
 
-                            // ✅ También eliminar del inventario del personaje (si corresponde)
-                            currentCharacter.inventory[selectedSlotIndex] = null;
+                            // 🔁 Reordenamos también el inventario del personaje
+                            for (int i = selectedSlotIndex; i < currentCharacter.inventory.Length - 1; i++)
+                            {
+                                currentCharacter.inventory[i] = currentCharacter.inventory[i + 1];
+                            }
+                            currentCharacter.inventory[currentCharacter.inventory.Length - 1] = null;
 
                             currentCharacter.canAct = false;
                         }
@@ -299,8 +345,10 @@ public class TurnManager : MonoBehaviour
             MouseController.Instance.PositionCharacterOnTile(character, character.activeTile);
             character.canMove = true;
             character.canAct = false;
+            character.ResetTemporaryAttackBuff(); // ✅ Aquí es clave resetear el buff
         }
         activeCharacter = 0;
+        currentCharacter = characters[activeCharacter]; // ✅ Asegura asignar al comenzar el turno
 
         UpdateUI();
     }
@@ -318,6 +366,9 @@ public class TurnManager : MonoBehaviour
             // Si encontramos uno que pueda moverse o actuar, salimos del bucle.
             if (characters[activeCharacter].canMove || characters[activeCharacter].canAct)
             {
+                currentCharacter = characters[activeCharacter]; // ✅ Actualiza personaje activo
+
+                characters[activeCharacter].ResetTemporaryAttackBuff();
                 break;
             }
         }
@@ -339,6 +390,7 @@ public class TurnManager : MonoBehaviour
             // Si encontramos uno que pueda moverse o actuar, salimos del bucle.
             if (characters[activeCharacter].canMove || characters[activeCharacter].canAct)
             {
+                currentCharacter = characters[activeCharacter];
                 break;
             }
         }

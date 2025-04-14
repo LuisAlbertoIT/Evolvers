@@ -29,7 +29,8 @@ public class CharacterInfo : MonoBehaviour
     public bool canMove = true;
     public bool canAct = true;
 
-
+    public bool hasTemporaryAttackBuff = false;
+    private int originalAttack;
 
     public InventoryItem[] inventory = new InventoryItem[16];
 
@@ -128,5 +129,25 @@ public class CharacterInfo : MonoBehaviour
     {
         activeTile = collision.GetComponent<OverlayTile>();
         activeTile.isBlocked = false;
+    }
+    public void ApplyTemporaryAttackBuff(int amount)
+    {
+        if (!hasTemporaryAttackBuff)
+        {
+            originalAttack = attack;
+            attack += amount;
+            hasTemporaryAttackBuff = true;
+            Debug.Log($"{characterName} ganó +{amount} ataque temporal. Ataque actual: {attack}");
+        }
+    }
+
+    public void ResetTemporaryAttackBuff()
+    {
+        if (hasTemporaryAttackBuff)
+        {
+            attack = originalAttack;
+            hasTemporaryAttackBuff = false;
+            Debug.Log($"{characterName} perdió el ataque temporal. Ataque restaurado a: {attack}");
+        }
     }
 }
