@@ -66,12 +66,12 @@ public class UI_ListManager : MonoBehaviour
         if (selectedCriaturas.Contains(criatura))
         {
             selectedCriaturas.Remove(criatura);
-            button.transform.SetParent(contentPanel);
+            button.transform.SetParent(contentPanel, false);
         }
         else
         {
             selectedCriaturas.Add(criatura);
-            button.transform.SetParent(selectedPanel);
+            button.transform.SetParent(selectedPanel, false);
         }
     }
 
