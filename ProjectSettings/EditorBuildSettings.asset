@@ -32,5 +32,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Casa3.unity
     guid: 42b22c42dd284b44684e5a1b652e6da2
+  - enabled: 1
+    path: Assets/Scenes/Test mecanicas/test.unity
+    guid: 83b6c32166e80ba4289457563a1c107b
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
