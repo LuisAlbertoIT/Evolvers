@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterInfo : MonoBehaviour
 {
@@ -29,6 +30,15 @@ public class CharacterInfo : MonoBehaviour
     public bool canMove = true;
     public bool canAct = true;
 
+    [Header("Health Bar UI")]
+    public Texture2D healthBarBGTex;
+    public Texture2D healthBarFillTex;
+    public SpriteRenderer healthBarBGRenderer;
+    public SpriteRenderer healthBarFillRenderer;
+    public float healthBarDisplayDuration = 1.5f;
+
+    private Coroutine healthBarCoroutine;
+
     public bool hasTemporaryAttackBuff = false;
     private int originalAttack;
 
@@ -38,6 +48,32 @@ public class CharacterInfo : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
+        // ----- Crear Sprite de fondo -----
+        if (healthBarBGTex != null && healthBarBGRenderer != null)
+        {
+            Sprite bg = Sprite.Create(
+                healthBarBGTex,
+                new Rect(0, 0, healthBarBGTex.width, healthBarBGTex.height),
+                new Vector2(0f, 0.5f),     // pivote: left-center
+                100f                        // pixels-per-unit (ajusta a tu escala)
+            );
+            healthBarBGRenderer.sprite = bg;
+        }
+
+        // ----- Crear Sprite de relleno -----
+        if (healthBarFillTex != null && healthBarFillRenderer != null)
+        {
+            Sprite fill = Sprite.Create(
+                healthBarFillTex,
+                new Rect(0, 0, healthBarFillTex.width, healthBarFillTex.height),
+                new Vector2(0f, 0.5f),     // pivote: left-center
+                100f
+            );
+            healthBarFillRenderer.sprite = fill;
+        }
+        HideHealthBar();
+
+
         attacks.Add(gameObject.AddComponent<Attacks>().StandardAttack());
         activeAtk = attacks[0].attackName;
         attacks.Add(gameObject.AddComponent<Attacks>().AcidSpit());
@@ -49,6 +85,8 @@ public class CharacterInfo : MonoBehaviour
     {
         currentHP -= damage;
         Debug.Log($"{characterName} takes {damage} damage! HP: {currentHP}/{maxHP}");
+        UpdateHealthBar();
+        ShowHealthBarTemporarily();
         if (currentHP <= 0)
         {
             Die(attacker);
@@ -59,6 +97,8 @@ public class CharacterInfo : MonoBehaviour
     {
         currentHP = Mathf.Min(maxHP, currentHP + amount);
         Debug.Log($"{characterName} heals for {amount}! HP: {currentHP}/{maxHP}");
+        UpdateHealthBar();
+        ShowHealthBarTemporarily();
     }
 
     private void Die(CharacterInfo attacker)
@@ -116,6 +156,40 @@ public class CharacterInfo : MonoBehaviour
         }
     }
 
+    private void UpdateHealthBar()
+    {
+        if (healthBarFillRenderer != null)
+        {
+            float frac = (float)currentHP / maxHP;
+            frac = Mathf.Clamp01(frac);
+            healthBarFillRenderer.transform.localScale = new Vector3(frac, 1f, 1f);
+        }
+    }
+
+    private void ShowHealthBarTemporarily()
+    {
+        // Cancelar cualquier coroutine vigente
+        if (healthBarCoroutine != null)
+            StopCoroutine(healthBarCoroutine);
+        // Mostrar ambas partes
+        if (healthBarBGRenderer != null) healthBarBGRenderer.enabled = true;
+        if (healthBarFillRenderer != null) healthBarFillRenderer.enabled = true;
+        // Iniciar temporizador
+        healthBarCoroutine = StartCoroutine(HideAfterDelay());
+    }
+
+    IEnumerator HideAfterDelay()
+    {
+        yield return new WaitForSeconds(healthBarDisplayDuration);
+        HideHealthBar();
+        healthBarCoroutine = null;
+    }
+
+    private void HideHealthBar()
+    {
+        if (healthBarBGRenderer != null) healthBarBGRenderer.enabled = false;
+        if (healthBarFillRenderer != null) healthBarFillRenderer.enabled = false;
+    }
 
 
     private void OnTriggerEnter2D(Collider2D collision)

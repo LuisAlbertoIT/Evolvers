@@ -433,6 +433,7 @@ public class TurnManager : MonoBehaviour
 
     private void AttackMenu()
     {
+        ClearAttackMenu();
         foreach (Attacks attack in characters[activeCharacter].attacks)
         {
             btn = Instantiate(attackBtn);
