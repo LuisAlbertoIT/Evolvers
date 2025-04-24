@@ -3148,11 +3148,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 395259927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d59eb990089e18d45b53429591760f26, type: 3}
+  m_Script: {fileID: 11500000, guid: ecaf7fba41195e641897ef05f32e9593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 0
-  playerDestination: {x: 32.5, y: 1.8}
+  sceneIndex: 4
+  playerDestination: {x: 32.54, y: 1.83}
 --- !u!1 &429075485
 GameObject:
   m_ObjectHideFlags: 0
@@ -3163,7 +3163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 429075486}
   - component: {fileID: 429075489}
-  - component: {fileID: 429075490}
+  - component: {fileID: 429075491}
   m_Layer: 0
   m_Name: Exit
   m_TagString: Untagged
@@ -3232,7 +3232,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.9717996, y: 0.38497686}
   m_EdgeRadius: 0
---- !u!114 &429075490
+--- !u!114 &429075491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3241,11 +3241,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 429075485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d59eb990089e18d45b53429591760f26, type: 3}
+  m_Script: {fileID: 11500000, guid: ecaf7fba41195e641897ef05f32e9593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 0
-  playerDestination: {x: 26.5, y: 1.8}
+  sceneIndex: 4
+  playerDestination: {x: 26.53, y: 1.83}
 --- !u!1 &465553941
 GameObject:
   m_ObjectHideFlags: 0
@@ -6704,7 +6704,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 75
-      m_TileSpriteIndex: 75
+      m_TileSpriteIndex: 76
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -6734,7 +6734,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 74
-      m_TileSpriteIndex: 74
+      m_TileSpriteIndex: 75
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -6744,7 +6744,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 73
-      m_TileSpriteIndex: 73
+      m_TileSpriteIndex: 74
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -7323,14 +7323,14 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 10
     m_Data: {fileID: -65014761, guid: 7931599c7a2a4894ba8f0ca4788a9a61, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -1756426799, guid: 7931599c7a2a4894ba8f0ca4788a9a61, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1959041369, guid: 7931599c7a2a4894ba8f0ca4788a9a61, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -140411800, guid: 7931599c7a2a4894ba8f0ca4788a9a61, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -735314325, guid: 7931599c7a2a4894ba8f0ca4788a9a61, type: 3}
   - m_RefCount: 18
@@ -8627,11 +8627,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1410298579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d59eb990089e18d45b53429591760f26, type: 3}
+  m_Script: {fileID: 11500000, guid: ecaf7fba41195e641897ef05f32e9593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 0
-  playerDestination: {x: -27.5, y: 11.75}
+  sceneIndex: 4
+  playerDestination: {x: -27.4, y: 11.75}
 --- !u!1 &1438050702
 GameObject:
   m_ObjectHideFlags: 0
@@ -12951,7 +12951,7 @@ Transform:
   m_GameObject: {fileID: 1908493396}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.01, y: -4.5, z: 0}
+  m_LocalPosition: {x: 0.05, y: -4.8, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:

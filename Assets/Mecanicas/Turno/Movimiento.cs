@@ -1,9 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Audio;
 
 public class Movimiento : MonoBehaviour
 {
     public float speed = 5f;
     public Vector2 direction;
+    AudioSource lazer;
+    
+
+
 
     Rigidbody2D rigidbodyTopDown;
     Animator animator;
@@ -18,6 +23,7 @@ public class Movimiento : MonoBehaviour
     {
         rigidbodyTopDown = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        lazer = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -40,6 +46,10 @@ public class Movimiento : MonoBehaviour
         {
             animator.Play("Attack");
             isAttacking = true;
+            if (lazer != null)
+            {
+                lazer.Play();  
+            }
             direction = Vector2.zero;
 
 
