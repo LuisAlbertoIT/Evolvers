@@ -116,6 +116,56 @@ MonoBehaviour:
   activeAtk: 
   canMove: 1
   canAct: 1
+  hasTemporaryAttackBuff: 0
+  inventory:
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
+  - itemName: 
+    icon: {fileID: 0}
+    quantity: 1
 --- !u!61 &7913053143652596885
 BoxCollider2D:
   m_ObjectHideFlags: 0

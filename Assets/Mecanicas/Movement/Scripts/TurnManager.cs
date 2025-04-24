@@ -277,7 +277,7 @@ public class TurnManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            GetComponent<SceneChanger>().CargarEscena("Base");
+            GetComponent<SceneChanger>().CargarEscena("Credito");
         }
     }
 
@@ -477,7 +477,7 @@ public class TurnManager : MonoBehaviour
             ClearAttackMenu();
             Debug.Log("Game Over");
             gameOver = true;
-            StartCoroutine(CambiarEscena("Credito")); 
+           
 
         }
 
@@ -486,7 +486,7 @@ public class TurnManager : MonoBehaviour
             ClearAttackMenu();
             Debug.Log("Winner");
             gameOver = true;
-            StartCoroutine(CambiarEscena("Credito"));
+            
         }
     }
 
@@ -581,9 +581,5 @@ public class TurnManager : MonoBehaviour
             }
         }
     }
-    IEnumerator CambiarEscena(string nombreEscena)
-    {
-        yield return new WaitForSeconds(2f); 
-        GetComponent<SceneChanger>().CargarEscena(nombreEscena);
-    }
+   
 }
