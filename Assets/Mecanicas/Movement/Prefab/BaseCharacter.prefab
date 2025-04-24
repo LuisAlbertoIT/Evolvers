@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 3941497500515316164}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.8, y: 1.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2, y: 1.4, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6326059554783776912}
@@ -113,9 +113,9 @@ Transform:
   m_GameObject: {fileID: 5910048724443317342}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.8, y: 1.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -2, y: 1.4, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.03125}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6326059554783776912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -162,7 +162,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -296,6 +296,7 @@ MonoBehaviour:
   healthBarFillTex: {fileID: 2800000, guid: 48a8f100600e69047900d0ba2c222e8c, type: 3}
   healthBarBGRenderer: {fileID: 7434211777145982424}
   healthBarFillRenderer: {fileID: 8115422605695659168}
+  healthBarDisplayDuration: 3
   hasTemporaryAttackBuff: 0
   inventory:
   - itemName: 
