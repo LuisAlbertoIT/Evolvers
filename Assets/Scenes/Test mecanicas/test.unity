@@ -7024,6 +7024,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombreEscena: 
   transitionTime: 1
+  sceneIndex: 0
+  playerDestination: {x: 0, y: 0}
 --- !u!114 &1251270126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8882,7 +8884,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 1fdace00456902f4ca825bf1d88b99bf, type: 3}
   m_Resource: {fileID: 8300000, guid: 1fdace00456902f4ca825bf1d88b99bf, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
