@@ -16,13 +16,17 @@ public class SceneChanger : MonoBehaviour
     {
         transitionAnimator = GetComponentInChildren<Animator>();
     }
-    public void CargarEscena1(string nombreEscena)
+    public void VolverAMapaMundi()
     {
-
-        DataInstance.Instance.playerPosition = playerDestination;
-        StartCoroutine(SceneLoad1(nombreEscena));
-
-
+        if (ActivarGuiaEnemy.instance != null)
+        {
+            ActivarGuiaEnemy.instance.regresarDesdeExploracion = true;
+            SceneManager.LoadScene("Mapa mundi");
+        }
+        else
+        {
+            Debug.LogError("No existe el SceneController. Asegúrate de iniciar desde la escena que lo tiene.");
+        }
     }
     public void CargarEscena(string nombreEscena)
     {
@@ -46,31 +50,6 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(nombreEscena);
 
     }
-    public IEnumerator SceneLoad1(string nombreEscena)
-    {
-        transitionAnimator.SetTrigger("StartTranstion");
-        yield return new WaitForSeconds(transitionTime);
-
-        // Cargar la escena y esperar a que esté lista
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nombreEscena);
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-
-        // Esperamos un frame por seguridad para que todo esté inicializado
-        yield return null;
-
-        // Buscar y activar el Canvas
-        GameObject canvas = GameObject.Find("GuiaEnemy");
-        if (canvas != null)
-        {
-            canvas.SetActive(true);
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró el CanvasEspecial en la nueva escena.");
-        }
-    }
+ 
 }
 

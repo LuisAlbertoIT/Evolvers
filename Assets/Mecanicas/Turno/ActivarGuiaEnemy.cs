@@ -2,17 +2,20 @@ using UnityEngine;
 
 public class ActivarGuiaEnemy : MonoBehaviour
 {
-    void Start()
-    {
-        GameObject canvas = GameObject.Find("GuiaEnemy");
+    public static ActivarGuiaEnemy instance;
 
-        if (canvas != null)
+    public bool regresarDesdeExploracion = false;
+
+    private void Awake()
+    {
+        if (instance == null)
         {
-            canvas.SetActive(true);  
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Debug.LogWarning("No se encontró el Canvas 'GuiaEnemy'");
+            Destroy(gameObject);
         }
     }
 }
