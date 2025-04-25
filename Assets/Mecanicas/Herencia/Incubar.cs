@@ -8,6 +8,7 @@ public class Incubar : MonoBehaviour
     public GameObject criaturaPrefab;
     public float tiempoDeEspera = 5f;
     private GameManager gameManager;
+    public UISpriteAnimation spriteAnimation;
 
     private void Start()
     {
@@ -16,7 +17,9 @@ public class Incubar : MonoBehaviour
 
     public void EsperarIncubacion()
     {
+        spriteAnimation.Func_PlayUIAnim();
         StartCoroutine(IncubarCriatura());
+        
     }
 
     private IEnumerator IncubarCriatura()
@@ -48,6 +51,7 @@ public class Incubar : MonoBehaviour
             nuevaCriaturaComponent.traits = new List<TraitBase>(criaturaSinIncubar.traits);
             gameManager.AgregarCriatura(nuevaCriaturaComponent);
         }
+        spriteAnimation.Func_StopUIAnim();
     }
 
     private void OnEnable()
