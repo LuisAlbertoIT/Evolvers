@@ -9,24 +9,35 @@ public class Incubar : MonoBehaviour
     public float tiempoDeEspera = 5f;
     private GameManager gameManager;
     public UISpriteAnimation spriteAnimation;
+    public GameObject image1;
+    public GameObject image2;
 
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
+        image2.SetActive(false);
     }
 
     public void EsperarIncubacion()
     {
-        spriteAnimation.Func_PlayUIAnim();
+        
         StartCoroutine(IncubarCriatura());
         
     }
 
     private IEnumerator IncubarCriatura()
     {
+        image1.SetActive(true);
+        spriteAnimation.Func_PlayUIAnim();
+
         yield return new WaitForSeconds(tiempoDeEspera);
         if (gameManager.listaSinIncubar.Count > 0)
         {
+            yield return new WaitForSeconds(2);
+            image1.SetActive(false);
+            image2.SetActive(false);
+            
+
             Criatura criaturaSinIncubar = gameManager.listaSinIncubar[0];
             gameManager.listaSinIncubar.RemoveAt(0);
             GameObject nuevaCriatura = Instantiate(criaturaPrefab, transform.position, transform.rotation);
@@ -52,6 +63,7 @@ public class Incubar : MonoBehaviour
             gameManager.AgregarCriatura(nuevaCriaturaComponent);
         }
         spriteAnimation.Func_StopUIAnim();
+        image2.SetActive(true);
     }
 
     private void OnEnable()
