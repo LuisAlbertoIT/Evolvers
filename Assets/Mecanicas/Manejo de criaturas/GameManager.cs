@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instancia;
 
+
     public List<Criatura> listaCriaturas = new List<Criatura>();  // Criaturas que posees
     public List<Criatura> listaExpedicion = new List<Criatura>(); // Criaturas en expedición
     public List<Criatura> listaSinIncubar = new List<Criatura>(); // Método para agregar una criatura a la lista de criaturas sin incubar

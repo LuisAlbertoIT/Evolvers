@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class Incubar : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Incubar : MonoBehaviour
     {
         gameManager = FindFirstObjectByType<GameManager>();
         image2.SetActive(false);
+        image1.SetActive(false);
     }
 
     public void EsperarIncubacion()
