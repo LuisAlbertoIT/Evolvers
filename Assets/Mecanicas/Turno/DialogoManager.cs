@@ -26,7 +26,7 @@ public class DialogoManager : MonoBehaviour
     private bool escribiendo = false;
 
     [Header("Botones a controlar")]
-    public Button[] botonesAControlar; // <<<<< NUEVO: lista de botones que quieres desactivar/activar
+    public Button[] botonesAControlar;
 
     void Start()
     {
@@ -43,7 +43,7 @@ public class DialogoManager : MonoBehaviour
         if (imagenFinal != null)
             imagenFinal.SetActive(false);
 
-        ActivarBotones(true); // Asegura que los botones estén activos al principio
+        ActivarBotones(true); 
     }
 
     void Update()
@@ -86,7 +86,7 @@ public class DialogoManager : MonoBehaviour
         dialogoActivo = indice;
         indiceLinea = 0;
 
-        // ⚡️ SOLO si existe un panel real, activamos diálogo
+
         if (dialogos[dialogoActivo].panelDialogo != null)
         {
             hayDialogoActivo = true;
@@ -98,14 +98,14 @@ public class DialogoManager : MonoBehaviour
                     imagen.SetActive(true);
             }
 
-            ActivarBotones(false); // <<<<<< desactivamos botones SOLO si hay diálogo real
+            ActivarBotones(false); 
             StartCoroutine(EscribirLinea());
         }
         else
         {
-            // Si el panel fue destruido, aseguramos que botones estén activos
+            
             hayDialogoActivo = false;
-            ActivarBotones(true); // <<<<<< aseguramos botones activos si no hay panel
+            ActivarBotones(true);
             Debug.LogWarning("No se puede activar diálogo: Panel destruido.");
         }
     }
@@ -147,7 +147,7 @@ public class DialogoManager : MonoBehaviour
             dialogoActivo = -1;
             hayDialogoActivo = false;
 
-            ActivarBotones(true); // <<<<< ACTIVAR BOTONES cuando termina el diálogo normalmente
+            ActivarBotones(true); 
         }
     }
 
@@ -178,7 +178,7 @@ public class DialogoManager : MonoBehaviour
             dialogos[indice].panelDialogo = null;
         }
 
-        ActivarBotones(true); // <<<<< ACTIVAR BOTONES si se destruye manualmente
+        ActivarBotones(true); 
     }
 
     private void ActivarBotones(bool estado)
