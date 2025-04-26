@@ -3960,6 +3960,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2584363662616652142, guid: d4a5fae9a99e5434cbb3fa4f558a8b2f, type: 3}
+      propertyPath: transitionAnimator
+      value: 
+      objectReference: {fileID: 2136876550}
     - target: {fileID: 5304610764160137185, guid: d4a5fae9a99e5434cbb3fa4f558a8b2f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 415.7761
@@ -7024,6 +7028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombreEscena: 
   transitionTime: 1
+  transitionAnimator: {fileID: 0}
   sceneIndex: 0
   playerDestination: {x: 0, y: 0}
 --- !u!114 &1251270126
@@ -19890,6 +19895,11 @@ CanvasRenderer:
 Transform:
   m_CorrespondingSourceObject: {fileID: 507242851200095813, guid: d340511bf022c5a47b9d34413e6f50dc, type: 3}
   m_PrefabInstance: {fileID: 1835882122}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2136876550 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1551434940169609648, guid: d4a5fae9a99e5434cbb3fa4f558a8b2f, type: 3}
+  m_PrefabInstance: {fileID: 692646313}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2137187141 stripped
 Transform:
