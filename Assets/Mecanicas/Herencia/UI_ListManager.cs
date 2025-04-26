@@ -5,21 +5,35 @@ using TMPro;
 
 public class UI_ListManager : MonoBehaviour
 {
-    public GameObject buttonPrefab; // Prefab del botón
-    public Transform contentPanel; // Donde se generarán los botones
-    public Transform selectedPanel; // Donde se mostrarán los seleccionados
-    public Button sendButton; // Botón para enviar los seleccionados
+    public GameObject buttonPrefab; // Prefab del botón  
+    public Transform contentPanel; // Donde se generarán los botones  
+    public Transform selectedPanel; // Donde se mostrarán los seleccionados  
+    public Button sendButton; // Botón para enviar los seleccionados  
 
     private GameManager gameManager;
     private List<Criatura> selectedCriaturas = new List<Criatura>();
+    private HashSet<Criatura> displayedCriaturas = new HashSet<Criatura>(); // Para rastrear las criaturas ya mostradas  
 
     void Start()
     {
-        TestHerencia testHerencia = FindFirstObjectByType<TestHerencia>();
-
         gameManager = GameManager.instancia;
         PopulateList();
         sendButton.onClick.AddListener(SendSelectedCriaturas);
+    }
+
+    void Update()
+    {
+        if (selectedCriaturas.Count >= 2)
+        {
+            sendButton.interactable = true;
+        }
+        else
+        {
+            sendButton.interactable = false;
+        }
+
+        // Llamar a PopulateList en cada frame para agregar nuevas criaturas  
+        PopulateList();
     }
 
     void PopulateList()
@@ -35,6 +49,12 @@ public class UI_ListManager : MonoBehaviour
             if (criatura == null)
             {
                 Debug.LogError("Una de las criaturas en la lista es nula.");
+                continue;
+            }
+
+            // Verificar si la criatura ya fue mostrada  
+            if (displayedCriaturas.Contains(criatura))
+            {
                 continue;
             }
 
@@ -58,6 +78,9 @@ public class UI_ListManager : MonoBehaviour
             }
 
             newButton.GetComponent<Button>().onClick.AddListener(() => OnCriaturaButtonClicked(criatura, newButton));
+
+            // Agregar la criatura a la lista de mostradas  
+            displayedCriaturas.Add(criatura);
         }
     }
 

@@ -5,20 +5,18 @@ public static class GeneticsSystem
 {
     public static Criatura BreedCreatures(Criatura parent1, Criatura parent2)
     {
-        GameObject childObject = new GameObject("Nueva Criatura");
+        GameObject childObject = new GameObject(parent1.Nombre + "Junior");
         Criatura child = childObject.AddComponent<Criatura>();
+        child.traits = new List<TraitBase>(); // Asegúrate de inicializar la lista
 
-        // Añadir prefab a la nueva criatura
+        // Añadir prefab a la nueva criatura  
         GameObject prefab = Resources.Load<GameObject>("Sprites/Criaturas/Evolvers/Evolver");
         if (prefab != null)
         {
             GameObject.Instantiate(prefab, childObject.transform);
         }
-        
 
-
-
-        // Herencia de stats
+        // Herencia de stats  
         child.Fuerza = Random.Range(parent1.Fuerza, parent2.Fuerza + 1);
         child.Vitalidad = Random.Range(parent1.Vitalidad, parent2.Vitalidad + 1);
         child.Vigor = Random.Range(parent1.Vigor, parent2.Vigor + 1);
@@ -35,20 +33,66 @@ public static class GeneticsSystem
         child.AccionesMax = 3;
         child.Acciones = child.AccionesMax;
 
+        // Herencia de sprites  
+        child.sprites = new SpriteRenderer[parent1.sprites.Length];
+        for (int i = 0; i < parent1.sprites.Length; i++)
+        {
+            if (parent1.sprites[i] != null)
+            {
+                // Crear un nuevo GameObject para el sprite
+                GameObject spriteObject = new GameObject(parent1.sprites[i].name);
+                spriteObject.transform.SetParent(childObject.transform);
+
+                // Añadir un SpriteRenderer al nuevo GameObject
+                SpriteRenderer spriteRenderer = spriteObject.AddComponent<SpriteRenderer>();
+                spriteRenderer.sprite = parent1.sprites[i].sprite;
+
+                // Copiar propiedades del SpriteRenderer del padre
+                spriteRenderer.sortingLayerID = parent1.sprites[i].sortingLayerID;
+                spriteRenderer.sortingOrder = parent1.sprites[i].sortingOrder;
+                spriteRenderer.color = parent1.sprites[i].color; // Opcional: heredar el color del sprite
+
+                // Asignar el SpriteRenderer al array de sprites del hijo
+                child.sprites[i] = spriteRenderer;
+            }
+        }
+
+
         // Herencia de traits (50% de probabilidad por cada trait)
+
         foreach (TraitBase trait in parent1.traits)
         {
-            if (Random.value < 0.5f)
-                child.AddTrait(childObject.AddComponent(trait.GetType()) as TraitBase);
+            if (trait != null && Random.value < 0.5f)
+            {
+                TraitBase newTrait = childObject.AddComponent(trait.GetType()) as TraitBase;
+                if (newTrait != null)
+                {
+                    child.AddTrait(newTrait);
+                }
+                else
+                {
+                    Debug.LogError($"No se pudo añadir el trait del tipo {trait.GetType()} al hijo.");
+                }
+            }
         }
 
         foreach (TraitBase trait in parent2.traits)
         {
-            if (Random.value < 0.5f && !child.traits.Exists(t => t.GetType() == trait.GetType()))
-                child.AddTrait(childObject.AddComponent(trait.GetType()) as TraitBase);
+            if (trait != null && Random.value < 0.5f && !child.traits.Exists(t => t.GetType() == trait.GetType()))
+            {
+                TraitBase newTrait = childObject.AddComponent(trait.GetType()) as TraitBase;
+                if (newTrait != null)
+                {
+                    child.AddTrait(newTrait);
+                }
+                else
+                {
+                    Debug.LogError($"No se pudo añadir el trait del tipo {trait.GetType()} al hijo.");
+                }
+            }
         }
 
-        // Mutaciones (10% de probabilidad)
+        // Mutaciones (10% de probabilidad)  
         List<System.Type> possibleMutations = new List<System.Type> { typeof(TraitColorChanger), typeof(TraitFuerzaExtra) };
         if (Random.value < 0.1f)
         {

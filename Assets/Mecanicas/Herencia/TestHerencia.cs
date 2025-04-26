@@ -23,6 +23,8 @@ public class TestHerencia : MonoBehaviour
         }
 
         Criatura child = GeneticsSystem.BreedCreatures(obj1, obj2);
+        child.Nombre = a.Nombre + "Junior";
+        GameManager.instancia.AgregarCriaturaSinIncubar(child);
 
         if (child == null)
         {
