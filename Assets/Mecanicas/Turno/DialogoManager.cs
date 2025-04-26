@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -7,18 +7,21 @@ public class DialogoManager : MonoBehaviour
     [System.Serializable]
     public class Dialogo
     {
-        public GameObject panelDialogo; // Panel que contiene el di·logo
-        public TextMeshProUGUI textoDialogo; // Texto del di·logo
-        public string[] lineasDialogo; // LÌneas de texto
-        public GameObject[] imagenesDialogo; // Varias im·genes que acompaÒan el di·logo
-    }
+        public GameObject panelDialogo; // Panel que contiene el di√°logo
+        public TextMeshProUGUI textoDialogo; // Texto del di√°logo
+        public string[] lineasDialogo; // L√≠neas de texto
+        public GameObject[] imagenesDialogo; // Varias im√°genes que acompa√±an el di√°logo
+       
 
-    public Dialogo[] dialogos; // Todos los di·logos
+    }
+    private bool hayDialogoActivo = false;
+
+    public Dialogo[] dialogos; // Todos los di√°logos
     public float velocidadTexto = 0.05f;
     public GameObject imagenFinal; // Imagen final que se activa al terminar
 
-    private int dialogoActivo = -1; // Õndice del di·logo activo
-    private int indiceLinea = 0; // LÌnea actual
+    private int dialogoActivo = -1; // √çndice del di√°logo activo
+    private int indiceLinea = 0; // L√≠nea actual
     private bool escribiendo = false;
 
     void Start()
@@ -39,7 +42,7 @@ public class DialogoManager : MonoBehaviour
 
     void Update()
     {
-        if (dialogoActivo != -1 && Input.GetKeyDown(KeyCode.Space))
+        if (hayDialogoActivo && dialogoActivo != -1 && Input.GetKeyDown(KeyCode.Space))
         {
             if (escribiendo)
             {
@@ -56,36 +59,42 @@ public class DialogoManager : MonoBehaviour
 
     public void ActivarDialogo(int indice)
     {
+        if (indice < 0 || indice >= dialogos.Length)
+        {
+            Debug.LogWarning("√çndice de di√°logo inv√°lido en ActivarDialogo: " + indice);
+            return;
+        }
+
         if (dialogoActivo != -1)
         {
-            // Antes de desactivar im·genes, aseguramos que no estÈn destruidas
-            if (dialogos[dialogoActivo].panelDialogo)
+            // Antes de desactivar im√°genes, aseguramos que no est√©n destruidas
+            if (dialogos[dialogoActivo].panelDialogo != null)
                 dialogos[dialogoActivo].panelDialogo.SetActive(false);
 
             foreach (var imagen in dialogos[dialogoActivo].imagenesDialogo)
             {
-                if (imagen)
+                if (imagen != null)
                     imagen.SetActive(false);
             }
         }
 
         dialogoActivo = indice;
         indiceLinea = 0;
+        hayDialogoActivo = true; // ‚úÖ Activamos la bandera
 
-        // AQUÕ: comprobamos si el panel existe ANTES de intentar usarlo
-        if (dialogos[dialogoActivo].panelDialogo)
+        if (dialogos[dialogoActivo].panelDialogo != null)
         {
             dialogos[dialogoActivo].panelDialogo.SetActive(true);
 
             foreach (var imagen in dialogos[dialogoActivo].imagenesDialogo)
             {
-                if (imagen)
+                if (imagen != null)
                     imagen.SetActive(true);
             }
 
             StartCoroutine(EscribirLinea());
         }
-        
+
     }
 
     IEnumerator EscribirLinea()
@@ -127,22 +136,30 @@ public class DialogoManager : MonoBehaviour
     }
     public void DestruirDialogo(int indice)
     {
+
         if (indice < 0 || indice >= dialogos.Length)
         {
-            Debug.LogWarning("Õndice de di·logo fuera de rango al intentar destruir: " + indice);
+            Debug.LogWarning("√çndice de di√°logo fuera de rango al intentar destruir: " + indice);
             return;
+        }
+
+        if (dialogoActivo == indice)
+        {
+            StopAllCoroutines();
+            escribiendo = false;
+            dialogoActivo = -1;
+            hayDialogoActivo = false; // <- MUY IMPORTANTE: desactivamos bandera
+
+            if (dialogos[indice].textoDialogo != null)
+            {
+                dialogos[indice].textoDialogo.text = string.Empty;
+            }
         }
 
         if (dialogos[indice].panelDialogo != null)
         {
-            Destroy(dialogos[indice].panelDialogo); // °Destruye el panel del di·logo!
-            dialogos[indice].panelDialogo = null;    // Limpieza para evitar referencias rotas
-        }
-
-        // Si destruimos el activo, reseteamos
-        if (dialogoActivo == indice)
-        {
-            dialogoActivo = -1;
+            Destroy(dialogos[indice].panelDialogo);
+            dialogos[indice].panelDialogo = null;
         }
     }
 }

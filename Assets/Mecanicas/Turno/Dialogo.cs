@@ -6,28 +6,29 @@ using System.Collections.ObjectModel;
 
 public class Dialogo : MonoBehaviour
 {
+
     public TextMeshProUGUI dialogoIncubar;
     public string[] lines;
     public float textSpeed = 0.1f;
     public GameObject imagenFinal; // Imagen a activar al finalizar el diálogo
     int index;
+    bool isDestroyed = false; // <- Añadido para evitar errores
 
     void Start()
     {
-        imagenFinal.SetActive(false);
+        if (imagenFinal != null)
+            imagenFinal.SetActive(true);
+
         dialogoIncubar.text = string.Empty;
         StarDialogue();
-
-        if (imagenFinal != null)
-        {
-            imagenFinal.SetActive(false); // Asegurarse de que esté oculta al inicio
-        }
     }
 
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            if (isDestroyed) return; // Si ya fue destruido, no hacemos nada
+
             if (dialogoIncubar.text == lines[index])
             {
                 NextLine();
@@ -48,18 +49,21 @@ public class Dialogo : MonoBehaviour
 
     IEnumerator WriteLine()
     {
+        dialogoIncubar.text = string.Empty; // <- Asegura que empieza vacío
         foreach (char letter in lines[index].ToCharArray())
         {
             dialogoIncubar.text += letter;
             yield return new WaitForSeconds(textSpeed);
-            
-                imagenFinal.SetActive(true);
-            
         }
+
+        if (imagenFinal != null)
+            imagenFinal.SetActive(true);
     }
 
     public void NextLine()
     {
+        if (isDestroyed) return; // Previene múltiples destrucciones
+
         if (index < lines.Length - 1)
         {
             index++;
@@ -68,9 +72,28 @@ public class Dialogo : MonoBehaviour
         }
         else
         {
-
-            Destroy(gameObject);
-
+            DestroyDialogue();
         }
+    }
+
+    public void DestroyDialogue()
+    {
+        if (isDestroyed) return;
+
+        isDestroyed = true;
+
+        // Ocultar imagen final si existe
+        if (imagenFinal != null)
+            imagenFinal.SetActive(false);
+
+        StopAllCoroutines(); 
+
+        Destroy(gameObject);
+    }
+
+    // Esta función la puedes conectar al botón en el editor
+    public void OnButtonDestroyPressed()
+    {
+        DestroyDialogue();
     }
 }
