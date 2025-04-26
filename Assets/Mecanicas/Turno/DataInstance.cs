@@ -5,7 +5,8 @@ public class DataInstance : MonoBehaviour
    private static DataInstance instance;
 
     public Vector2 playerPosition;
-
+    public Vector2 returnPosition;
+    public bool comingBack = false;
     public static DataInstance Instance
     {
         get
@@ -24,7 +25,7 @@ public class DataInstance : MonoBehaviour
 
     private void Awake()
     {
-        if(instance != null && instance !& this)
+        if(instance != null && instance != this)
         {
             Destroy(gameObject);
         }

@@ -20,6 +20,8 @@ public class SceneChanger : MonoBehaviour
     {
         if (ActivarGuiaEnemy.instance != null)
         {
+
+            DataInstance.Instance.playerPosition = new Vector2(0.31f, -3.11f);
             ActivarGuiaEnemy.instance.regresarDesdeExploracion = true;
             SceneManager.LoadScene("Mapa mundi");
         }

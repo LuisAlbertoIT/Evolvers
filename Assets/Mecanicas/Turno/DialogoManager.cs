@@ -58,24 +58,34 @@ public class DialogoManager : MonoBehaviour
     {
         if (dialogoActivo != -1)
         {
-            dialogos[dialogoActivo].panelDialogo.SetActive(false);
+            // Antes de desactivar imágenes, aseguramos que no estén destruidas
+            if (dialogos[dialogoActivo].panelDialogo)
+                dialogos[dialogoActivo].panelDialogo.SetActive(false);
+
             foreach (var imagen in dialogos[dialogoActivo].imagenesDialogo)
             {
-                if (imagen != null)
+                if (imagen)
                     imagen.SetActive(false);
             }
         }
 
         dialogoActivo = indice;
         indiceLinea = 0;
-        dialogos[dialogoActivo].panelDialogo.SetActive(true);
-        foreach (var imagen in dialogos[dialogoActivo].imagenesDialogo)
-        {
-            if (imagen != null)
-                imagen.SetActive(true);
-        }
 
-        StartCoroutine(EscribirLinea());
+        // AQUÍ: comprobamos si el panel existe ANTES de intentar usarlo
+        if (dialogos[dialogoActivo].panelDialogo)
+        {
+            dialogos[dialogoActivo].panelDialogo.SetActive(true);
+
+            foreach (var imagen in dialogos[dialogoActivo].imagenesDialogo)
+            {
+                if (imagen)
+                    imagen.SetActive(true);
+            }
+
+            StartCoroutine(EscribirLinea());
+        }
+        
     }
 
     IEnumerator EscribirLinea()
