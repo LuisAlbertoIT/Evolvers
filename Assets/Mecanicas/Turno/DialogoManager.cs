@@ -1,28 +1,32 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class DialogoManager : MonoBehaviour
 {
     [System.Serializable]
     public class Dialogo
     {
-        public GameObject panelDialogo; // Panel que contiene el diálogo
-        public TextMeshProUGUI textoDialogo; // Texto del diálogo
-        public string[] lineasDialogo; // Líneas de texto
-        public GameObject[] imagenesDialogo; // Varias imágenes que acompañan el diálogo
-       
-
+        public GameObject panelDialogo;
+        public TextMeshProUGUI textoDialogo;
+        public string[] lineasDialogo;
+        public GameObject[] imagenesDialogo;
     }
+
     private bool hayDialogoActivo = false;
 
-    public Dialogo[] dialogos; // Todos los diálogos
+    public Dialogo[] dialogos;
     public float velocidadTexto = 0.05f;
-    public GameObject imagenFinal; // Imagen final que se activa al terminar
+    public GameObject imagenFinal;
 
-    private int dialogoActivo = -1; // Índice del diálogo activo
-    private int indiceLinea = 0; // Línea actual
+    private int dialogoActivo = -1;
+    private int indiceLinea = 0;
     private bool escribiendo = false;
+
+    [Header("Botones a controlar")]
+    public Button[] botonesAControlar; // <<<<< NUEVO: lista de botones que quieres desactivar/activar
 
     void Start()
     {
@@ -38,6 +42,8 @@ public class DialogoManager : MonoBehaviour
 
         if (imagenFinal != null)
             imagenFinal.SetActive(false);
+
+        ActivarBotones(true); // Asegura que los botones estén activos al principio
     }
 
     void Update()
@@ -67,7 +73,6 @@ public class DialogoManager : MonoBehaviour
 
         if (dialogoActivo != -1)
         {
-            // Antes de desactivar imágenes, aseguramos que no estén destruidas
             if (dialogos[dialogoActivo].panelDialogo != null)
                 dialogos[dialogoActivo].panelDialogo.SetActive(false);
 
@@ -80,10 +85,11 @@ public class DialogoManager : MonoBehaviour
 
         dialogoActivo = indice;
         indiceLinea = 0;
-        hayDialogoActivo = true; // ✅ Activamos la bandera
 
+        // ⚡️ SOLO si existe un panel real, activamos diálogo
         if (dialogos[dialogoActivo].panelDialogo != null)
         {
+            hayDialogoActivo = true;
             dialogos[dialogoActivo].panelDialogo.SetActive(true);
 
             foreach (var imagen in dialogos[dialogoActivo].imagenesDialogo)
@@ -92,9 +98,16 @@ public class DialogoManager : MonoBehaviour
                     imagen.SetActive(true);
             }
 
+            ActivarBotones(false); // <<<<<< desactivamos botones SOLO si hay diálogo real
             StartCoroutine(EscribirLinea());
         }
-
+        else
+        {
+            // Si el panel fue destruido, aseguramos que botones estén activos
+            hayDialogoActivo = false;
+            ActivarBotones(true); // <<<<<< aseguramos botones activos si no hay panel
+            Debug.LogWarning("No se puede activar diálogo: Panel destruido.");
+        }
     }
 
     IEnumerator EscribirLinea()
@@ -132,11 +145,14 @@ public class DialogoManager : MonoBehaviour
 
             Destroy(dialogos[dialogoActivo].panelDialogo);
             dialogoActivo = -1;
+            hayDialogoActivo = false;
+
+            ActivarBotones(true); // <<<<< ACTIVAR BOTONES cuando termina el diálogo normalmente
         }
     }
+
     public void DestruirDialogo(int indice)
     {
-
         if (indice < 0 || indice >= dialogos.Length)
         {
             Debug.LogWarning("Índice de diálogo fuera de rango al intentar destruir: " + indice);
@@ -148,7 +164,7 @@ public class DialogoManager : MonoBehaviour
             StopAllCoroutines();
             escribiendo = false;
             dialogoActivo = -1;
-            hayDialogoActivo = false; // <- MUY IMPORTANTE: desactivamos bandera
+            hayDialogoActivo = false;
 
             if (dialogos[indice].textoDialogo != null)
             {
@@ -160,6 +176,20 @@ public class DialogoManager : MonoBehaviour
         {
             Destroy(dialogos[indice].panelDialogo);
             dialogos[indice].panelDialogo = null;
+        }
+
+        ActivarBotones(true); // <<<<< ACTIVAR BOTONES si se destruye manualmente
+    }
+
+    private void ActivarBotones(bool estado)
+    {
+        if (botonesAControlar != null)
+        {
+            foreach (var boton in botonesAControlar)
+            {
+                if (boton != null)
+                    boton.interactable = estado;
+            }
         }
     }
 }
