@@ -8,6 +8,7 @@ public class SceneChanger : MonoBehaviour
     [SerializeField] private string nombreEscena;
     [SerializeField] private float transitionTime = 1f;
     public int sceneIndex;
+    GameManager gameManager;
 
     public Vector2 playerDestination;
     private Animator transitionAnimator;
@@ -15,6 +16,7 @@ public class SceneChanger : MonoBehaviour
     private void Start()
     {
         transitionAnimator = GetComponentInChildren<Animator>();
+        gameManager = FindFirstObjectByType<GameManager>();
     }
     public void VolverAMapaMundi()
     {
@@ -34,7 +36,7 @@ public class SceneChanger : MonoBehaviour
     {
        
         StartCoroutine(SceneLoad(nombreEscena));
-      
+        gameManager.DesactivarCriaturasEnProximaEscena();
 
     }
 

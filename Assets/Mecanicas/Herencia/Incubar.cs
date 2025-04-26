@@ -22,7 +22,11 @@ public class Incubar : MonoBehaviour
 
     public void EsperarIncubacion()
     {
-        
+        if (gameManager.listaSinIncubar.Count == 0)
+        {
+            Debug.Log("No hay criaturas para incubar.");
+            return;
+        }
         StartCoroutine(IncubarCriatura());
         
     }

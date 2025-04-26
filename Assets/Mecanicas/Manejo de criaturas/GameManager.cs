@@ -82,6 +82,11 @@ public class GameManager : MonoBehaviour
         {
             criatura.gameObject.SetActive(false);
         }
+
+        foreach (var criatura in listaSinIncubar)
+        {
+            criatura.gameObject.SetActive(false);
+        }
     }
 }
 
