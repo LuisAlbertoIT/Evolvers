@@ -3075,9 +3075,9 @@ MonoBehaviour:
   m_fontSize: 48
   m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 8
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -3275,15 +3275,15 @@ MonoBehaviour:
   - panelDialogo: {fileID: 693713398}
     textoDialogo: {fileID: 1282666372}
     lineasDialogo:
-    - "Selecionas las Creatura y luego Presiona el bot\xF3n Combinar   \"SPACIO\"
+    - "Selecionas las Criaturas y luego Presiona el bot\xF3n Combinar   \"SPACIO\"
       para continuar."
     imagenesDialogo:
     - {fileID: 667358121}
   - panelDialogo: {fileID: 1991196202}
     textoDialogo: {fileID: 2011581156}
     lineasDialogo:
-    - "Presiona el bot\xF3n Mezclar para combinar o Criatura para ver stan    \"SPACIO\"
-      para continuar."
+    - "Presiona el bot\xF3n Mezclar para combinar o Criatura para ver su informaci\xF3n   
+      \"SPACIO\" para continuar."
     imagenesDialogo:
     - {fileID: 44401798}
     - {fileID: 951583069}
@@ -4283,9 +4283,9 @@ MonoBehaviour:
   m_fontSize: 48
   m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 8
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -4620,12 +4620,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
+  m_fontSize: 42.6
   m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 8
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -6117,9 +6117,9 @@ MonoBehaviour:
   m_fontSize: 48
   m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 8
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -6243,7 +6243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7942122334257052457, guid: d4a5fae9a99e5434cbb3fa4f558a8b2f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6412,9 +6412,9 @@ MonoBehaviour:
   m_fontSize: 48
   m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 8
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
