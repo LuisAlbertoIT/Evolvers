@@ -465,12 +465,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3479459627479755181}
-  - {fileID: 857301175096722422}
+  - {fileID: 7608988448409254001}
+  - {fileID: 2957879778480640709}
   - {fileID: 5593349016375236174}
   - {fileID: 6540578572017790179}
-  - {fileID: 2957879778480640709}
-  - {fileID: 7608988448409254001}
+  - {fileID: 857301175096722422}
+  - {fileID: 3479459627479755181}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2711515202426305418
@@ -485,6 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adc3542e0590954ea577d4eaa1f2220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Nombre: 
   Vida: 10
   VidaMax: 10
   Energia: 5
@@ -494,13 +495,13 @@ MonoBehaviour:
   Vitalidad: 10
   Vigor: 5
   Fuerza: 5
+  resistencia: 0
   Adaptabilidad: 5
   Inteligencia: 5
   Velocidad: 5
   Metabolismo: 5
   sprites: []
   traits: []
-  Traits: []
 --- !u!1 &8596486721005326198
 GameObject:
   m_ObjectHideFlags: 0

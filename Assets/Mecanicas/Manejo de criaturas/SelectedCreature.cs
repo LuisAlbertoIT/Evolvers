@@ -11,6 +11,7 @@ public class SelectedCreature : MonoBehaviour
     public GameObject creaturePanel;
     public GameObject infoPanel;
     public GameObject selectedCreature;
+    public GameObject CreatureImage;
 
     void Awake()
     {
@@ -61,10 +62,44 @@ public class SelectedCreature : MonoBehaviour
                 GameObject.Find("Inteligencia").GetComponent<TMP_Text>().text = $"Inteligencia: {creature.Inteligencia}";
                 GameObject.Find("Velocidad").GetComponent<TMP_Text>().text = $"Velocidad: {creature.Velocidad}";
                 GameObject.Find("Metabolismo").GetComponent<TMP_Text>().text = $"Metabolismo: {creature.Metabolismo}";
-
+                UpdateSelectedCreatureSprites(CreatureImage, creature); // Actualiza los sprites de la criatura seleccionada
 
                 break;
             }
         }
     }
+
+    // Modificación del método UpdateSelectedCreatureSprites para que los sprites se rendericen por encima de los elementos de UI  
+    private void UpdateSelectedCreatureSprites(GameObject targetObject, Criatura selectedCreature)
+    {
+        // Eliminar todos los sprites existentes en el GameObject objetivo
+        foreach (Transform child in targetObject.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Añadir los nuevos sprites desde el array de la criatura seleccionada
+        foreach (SpriteRenderer spriteRenderer in selectedCreature.sprites)
+        {
+            if (spriteRenderer != null && spriteRenderer.sprite != null)
+            {
+                // Crear un nuevo GameObject para el sprite
+                GameObject newSpriteObject = new GameObject(spriteRenderer.name);
+
+                // Añadir un componente Image en lugar de SpriteRenderer
+                Image image = newSpriteObject.AddComponent<Image>();
+                image.sprite = spriteRenderer.sprite;
+
+                // Ajustar las propiedades del Image para que se vea correctamente
+                RectTransform rectTransform = newSpriteObject.GetComponent<RectTransform>();
+                rectTransform.SetParent(targetObject.transform, false); // Asegurar que se añada al objeto objetivo
+                rectTransform.localPosition = Vector3.zero; // Centrar el sprite en el contenedor
+                rectTransform.sizeDelta = new Vector2(100, 100); // Ajustar el tamaño del sprite (puedes personalizarlo)
+
+                // Opcional: Ajustar el orden de renderizado si es necesario
+                image.raycastTarget = false; // Evitar que interfiera con los eventos de UI
+            }
+        }
+    }
+
 }

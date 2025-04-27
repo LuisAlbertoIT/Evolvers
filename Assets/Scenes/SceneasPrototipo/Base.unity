@@ -2300,6 +2300,7 @@ MonoBehaviour:
   creaturePanel: {fileID: 682731851}
   infoPanel: {fileID: 333834918}
   selectedCreature: {fileID: 0}
+  CreatureImage: {fileID: 307811185}
 --- !u!114 &682731854
 MonoBehaviour:
   m_ObjectHideFlags: 0
