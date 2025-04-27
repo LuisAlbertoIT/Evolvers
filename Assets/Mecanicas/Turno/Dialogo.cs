@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
@@ -10,12 +10,14 @@ public class Dialogo : MonoBehaviour
     public TextMeshProUGUI dialogoIncubar;
     public string[] lines;
     public float textSpeed = 0.1f;
-    public GameObject imagenFinal; // Imagen a activar al finalizar el diálogo
+    public GameObject imagenFinal; // Imagen a activar al finalizar el diÃ¡logo
     int index;
-    bool isDestroyed = false; // <- Añadido para evitar errores
+    bool isDestroyed = false; // <- AÃ±adido para evitar errores
+    private Movimiento movimiento;
 
     void Start()
     {
+        movimiento = FindObjectOfType<Movimiento>();
         if (imagenFinal != null)
             imagenFinal.SetActive(true);
 
@@ -45,15 +47,24 @@ public class Dialogo : MonoBehaviour
     {
         index = 0;
         StartCoroutine(WriteLine());
+        // ðŸ”µ Pausa el juego y desactiva movimiento
+        if (movimiento != null)
+            movimiento.enabled = false;
+
+      
+
+
+
     }
 
     IEnumerator WriteLine()
     {
-        dialogoIncubar.text = string.Empty; // <- Asegura que empieza vacío
+
+        dialogoIncubar.text = string.Empty;
         foreach (char letter in lines[index].ToCharArray())
         {
             dialogoIncubar.text += letter;
-            yield return new WaitForSeconds(textSpeed);
+            yield return new WaitForSecondsRealtime(textSpeed); // <- Realtime!
         }
 
         if (imagenFinal != null)
@@ -62,7 +73,7 @@ public class Dialogo : MonoBehaviour
 
     public void NextLine()
     {
-        if (isDestroyed) return; // Previene múltiples destrucciones
+        if (isDestroyed) return; 
 
         if (index < lines.Length - 1)
         {
@@ -88,12 +99,21 @@ public class Dialogo : MonoBehaviour
 
         StopAllCoroutines(); 
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        DontDestroyOnLoad(this.gameObject);
+        if (movimiento != null)
+            movimiento.enabled = true;
+
+        
+
+
     }
 
-    // Esta función la puedes conectar al botón en el editor
+  
     public void OnButtonDestroyPressed()
     {
-        DestroyDialogue();
+         gameObject.SetActive(false);
+
+        DontDestroyOnLoad(this.gameObject);
     }
 }
