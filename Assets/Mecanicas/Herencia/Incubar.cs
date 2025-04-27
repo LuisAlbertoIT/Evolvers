@@ -42,35 +42,23 @@ public class Incubar : MonoBehaviour
             yield return new WaitForSeconds(2);
             image1.SetActive(false);
             image2.SetActive(false);
-            
 
+            // Obtener la criatura original de la lista sin incubar
             Criatura criaturaSinIncubar = gameManager.listaSinIncubar[0];
             gameManager.listaSinIncubar.RemoveAt(0);
-            GameObject nuevaCriatura = Instantiate(criaturaPrefab, transform.position, transform.rotation);
-            Criatura nuevaCriaturaComponent = nuevaCriatura.GetComponent<Criatura>();
-            // Copiar propiedades de la criatura sin incubar a la nueva criatura
-            nuevaCriaturaComponent.Nombre = criaturaSinIncubar.Nombre;
-            nuevaCriaturaComponent.Vida = criaturaSinIncubar.Vida;
-            nuevaCriaturaComponent.VidaMax = criaturaSinIncubar.VidaMax;
-            nuevaCriaturaComponent.Energia = criaturaSinIncubar.Energia;
-            nuevaCriaturaComponent.EnergiaMax = criaturaSinIncubar.EnergiaMax;
-            nuevaCriaturaComponent.Acciones = criaturaSinIncubar.Acciones;
-            nuevaCriaturaComponent.AccionesMax = criaturaSinIncubar.AccionesMax;
-            nuevaCriaturaComponent.Vitalidad = criaturaSinIncubar.Vitalidad;
-            nuevaCriaturaComponent.Vigor = criaturaSinIncubar.Vigor;
-            nuevaCriaturaComponent.Fuerza = criaturaSinIncubar.Fuerza;
-            nuevaCriaturaComponent.resistencia = criaturaSinIncubar.resistencia;
-            nuevaCriaturaComponent.Adaptabilidad = criaturaSinIncubar.Adaptabilidad;
-            nuevaCriaturaComponent.Inteligencia = criaturaSinIncubar.Inteligencia;
-            nuevaCriaturaComponent.Velocidad = criaturaSinIncubar.Velocidad;
-            nuevaCriaturaComponent.Metabolismo = criaturaSinIncubar.Metabolismo;
-            nuevaCriaturaComponent.sprites = criaturaSinIncubar.sprites;
-            nuevaCriaturaComponent.traits = new List<TraitBase>(criaturaSinIncubar.traits);
-            gameManager.AgregarCriatura(nuevaCriaturaComponent);
+
+            // Mover la criatura original a la lista de criaturas
+            gameManager.AgregarCriatura(criaturaSinIncubar);
+
+            // Opcional: Ajustar la posición de la criatura en la escena si es necesario
+            criaturaSinIncubar.transform.position = transform.position;
+            criaturaSinIncubar.transform.rotation = transform.rotation;
+            criaturaSinIncubar.gameObject.SetActive(true);
         }
         spriteAnimation.Func_StopUIAnim();
         image2.SetActive(true);
     }
+
 
     private void OnEnable()
     {

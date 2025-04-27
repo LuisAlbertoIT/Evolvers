@@ -9275,7 +9275,13 @@ MonoBehaviour:
   Inteligencia: 5
   Velocidad: 0
   Metabolismo: 5
-  sprites: []
+  sprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   traits: []
 --- !u!114 &2711515202374739140
 MonoBehaviour:
@@ -9304,7 +9310,13 @@ MonoBehaviour:
   Inteligencia: 5
   Velocidad: 5
   Metabolismo: 5
-  sprites: []
+  sprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   traits: []
 --- !u!4 &2957879778529021323
 Transform:
@@ -10128,7 +10140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &6658141761738895782
 GameObject:
   m_ObjectHideFlags: 0
@@ -10145,7 +10157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &6842295512095717726
 SpriteRenderer:
   m_ObjectHideFlags: 0
