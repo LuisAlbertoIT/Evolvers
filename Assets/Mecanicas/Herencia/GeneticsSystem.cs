@@ -10,11 +10,11 @@ public static class GeneticsSystem
         child.traits = new List<TraitBase>(); // Asegúrate de inicializar la lista
 
         // Añadir prefab a la nueva criatura  
-        GameObject prefab = Resources.Load<GameObject>("Sprites/Criaturas/Evolvers/Evolver");
+        /*GameObject prefab = Resources.Load<GameObject>("Sprites/Criaturas/Evolvers/Evolver");
         if (prefab != null)
         {
             GameObject.Instantiate(prefab, childObject.transform);
-        }
+        }*/
 
         // Herencia de stats  
         child.Fuerza = Random.Range(parent1.Fuerza, parent2.Fuerza + 1);

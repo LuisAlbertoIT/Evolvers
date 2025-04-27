@@ -73,20 +73,51 @@ public class GameManager : MonoBehaviour
     // Método para desactivar todas las criaturas en la próxima escena
     public void DesactivarCriaturasEnProximaEscena()
     {
+        // Desactivar criaturas en la lista de criaturas poseídas
         foreach (var criatura in listaCriaturas)
         {
-            criatura.gameObject.SetActive(false);
+            if (criatura != null)
+            {
+                criatura.gameObject.SetActive(false);
+            }
         }
 
+        // Desactivar criaturas en la lista de expedición
         foreach (var criatura in listaExpedicion)
         {
-            criatura.gameObject.SetActive(false);
+            if (criatura != null)
+            {
+                criatura.gameObject.SetActive(false);
+            }
         }
 
+        // Desactivar criaturas en la lista sin incubar
         foreach (var criatura in listaSinIncubar)
         {
-            criatura.gameObject.SetActive(false);
+            if (criatura != null)
+            {
+                criatura.gameObject.SetActive(false);
+            }
         }
     }
+
+    public void LimpiarObjetosNoReferenciados()
+    {
+        
+        Criatura[] todasLasCriaturas = FindObjectsOfType<Criatura>();
+
+        foreach (var criatura in todasLasCriaturas)
+        {
+            // Si la criatura no está en ninguna lista, desactivarla
+            if (!listaCriaturas.Contains(criatura) &&
+                !listaExpedicion.Contains(criatura) &&
+                !listaSinIncubar.Contains(criatura))
+            {
+                Debug.LogWarning($"Desactivando objeto no referenciado: {criatura.name}");
+                criatura.gameObject.SetActive(false);
+            }
+        }
+    }
+
 }
 
