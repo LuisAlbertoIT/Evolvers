@@ -10,9 +10,9 @@ public class Dialogo : MonoBehaviour
     public TextMeshProUGUI dialogoIncubar;
     public string[] lines;
     public float textSpeed = 0.1f;
-    public GameObject imagenFinal; // Imagen a activar al finalizar el diálogo
+    public GameObject imagenFinal; 
     int index;
-    bool isDestroyed = false; // <- Añadido para evitar errores
+    bool isDestroyed = false; 
     private Movimiento movimiento;
 
     void Start()
@@ -29,7 +29,7 @@ public class Dialogo : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            if (isDestroyed) return; // Si ya fue destruido, no hacemos nada
+            if (isDestroyed) return; 
 
             if (dialogoIncubar.text == lines[index])
             {
@@ -47,7 +47,7 @@ public class Dialogo : MonoBehaviour
     {
         index = 0;
         StartCoroutine(WriteLine());
-        // 🔵 Pausa el juego y desactiva movimiento
+      
         if (movimiento != null)
             movimiento.enabled = false;
 
@@ -64,7 +64,7 @@ public class Dialogo : MonoBehaviour
         foreach (char letter in lines[index].ToCharArray())
         {
             dialogoIncubar.text += letter;
-            yield return new WaitForSecondsRealtime(textSpeed); // <- Realtime!
+            yield return new WaitForSecondsRealtime(textSpeed); 
         }
 
         if (imagenFinal != null)
@@ -93,7 +93,7 @@ public class Dialogo : MonoBehaviour
 
         isDestroyed = true;
 
-        // Ocultar imagen final si existe
+       
         if (imagenFinal != null)
             imagenFinal.SetActive(false);
 
