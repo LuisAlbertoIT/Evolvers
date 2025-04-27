@@ -2172,8 +2172,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: 0.000061035156}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -32, y: -32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &682731853
 MonoBehaviour:
@@ -3110,10 +3110,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 682731852}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &916568532
 MonoBehaviour:
@@ -9270,7 +9270,7 @@ MonoBehaviour:
   Vitalidad: 10
   Vigor: 5
   Fuerza: 20
-  resistencia: 5
+  Resistencia: 0
   Adaptabilidad: 5
   Inteligencia: 5
   Velocidad: 0
@@ -9305,7 +9305,7 @@ MonoBehaviour:
   Vitalidad: 10
   Vigor: 5
   Fuerza: 5
-  resistencia: 10
+  Resistencia: 0
   Adaptabilidad: 5
   Inteligencia: 5
   Velocidad: 5
