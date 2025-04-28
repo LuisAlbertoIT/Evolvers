@@ -12,16 +12,18 @@ public class Dialogo : MonoBehaviour
     public float textSpeed = 0.1f;
     public GameObject imagenFinal;
 
+    [Header("Botones a controlar")]
+    public Button[] botonesAControlar;
+    public bool desactivarBotonesCompletamente = false; 
     int index;
     bool isDestroyed = false;
     private Movimiento movimiento;
-
-    private string saveKey; 
+    private string saveKey;
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject); 
-        saveKey = "Dialogo_" + gameObject.name; 
+        DontDestroyOnLoad(this.gameObject);
+        saveKey = "Dialogo_" + gameObject.name;
     }
 
     [System.Obsolete]
@@ -29,7 +31,6 @@ public class Dialogo : MonoBehaviour
     {
         movimiento = FindObjectOfType<Movimiento>();
 
-       
         if (DialogoData.Instance != null && DialogoData.Instance.EstaDialogoDestruido(saveKey.GetHashCode()))
         {
             isDestroyed = true;
@@ -69,6 +70,8 @@ public class Dialogo : MonoBehaviour
 
         if (movimiento != null)
             movimiento.enabled = false;
+
+        ActivarBotones(false); 
     }
 
     IEnumerator WriteLine()
@@ -111,7 +114,6 @@ public class Dialogo : MonoBehaviour
 
         StopAllCoroutines();
 
-        // Guardar en el Singleton que este diálogo fue destruido
         if (DialogoData.Instance != null)
         {
             DialogoData.Instance.MarcarDialogoDestruido(saveKey.GetHashCode());
@@ -121,10 +123,35 @@ public class Dialogo : MonoBehaviour
 
         if (movimiento != null)
             movimiento.enabled = true;
+
+        ActivarBotones(true); 
     }
 
     public void OnButtonDestroyPressed()
     {
         DestroyDialogue();
+    }
+
+    private void ActivarBotones(bool estado)
+    {
+        if (botonesAControlar != null)
+        {
+            foreach (var boton in botonesAControlar)
+            {
+                if (boton != null)
+                {
+                    if (desactivarBotonesCompletamente)
+                    {
+                      
+                        boton.gameObject.SetActive(estado);
+                    }
+                    else
+                    {
+                        
+                        boton.interactable = estado;
+                    }
+                }
+            }
+        }
     }
 }

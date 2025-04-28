@@ -13,6 +13,7 @@ public class DialogoManager : MonoBehaviour
         public TextMeshProUGUI textoDialogo;
         public string[] lineasDialogo;
         public GameObject[] imagenesDialogo;
+        public Button[] botonesAControlar; 
     }
 
     private bool hayDialogoActivo = false;
@@ -24,9 +25,6 @@ public class DialogoManager : MonoBehaviour
     private int dialogoActivo = -1;
     private int indiceLinea = 0;
     private bool escribiendo = false;
-
-    [Header("Botones a controlar")]
-    public Button[] botonesAControlar;
 
     void Start()
     {
@@ -53,8 +51,6 @@ public class DialogoManager : MonoBehaviour
 
         if (imagenFinal != null)
             imagenFinal.SetActive(false);
-
-        ActivarBotones(true);
     }
 
     void Update()
@@ -98,6 +94,8 @@ public class DialogoManager : MonoBehaviour
                 if (imagen != null)
                     imagen.SetActive(false);
             }
+
+            ActivarBotones(dialogoActivo, true); 
         }
 
         dialogoActivo = indice;
@@ -114,13 +112,12 @@ public class DialogoManager : MonoBehaviour
                     imagen.SetActive(true);
             }
 
-            ActivarBotones(false);
+            ActivarBotones(dialogoActivo, false); 
             StartCoroutine(EscribirLinea());
         }
         else
         {
             hayDialogoActivo = false;
-            ActivarBotones(true);
             Debug.LogWarning("No se puede activar diálogo: Panel destruido.");
         }
     }
@@ -158,14 +155,13 @@ public class DialogoManager : MonoBehaviour
                     imagen.SetActive(false);
             }
 
-            GuardarDialogoDestruido(dialogoActivo); 
+            GuardarDialogoDestruido(dialogoActivo);
             Destroy(dialogos[dialogoActivo].panelDialogo);
             dialogos[dialogoActivo].panelDialogo = null;
 
+            ActivarBotones(dialogoActivo, true); 
             dialogoActivo = -1;
             hayDialogoActivo = false;
-
-            ActivarBotones(true);
         }
     }
 
@@ -197,7 +193,7 @@ public class DialogoManager : MonoBehaviour
             dialogos[indice].panelDialogo = null;
         }
 
-        ActivarBotones(true);
+        ActivarBotones(indice, true); 
     }
 
     private void GuardarDialogoDestruido(int indice)
@@ -208,14 +204,17 @@ public class DialogoManager : MonoBehaviour
         }
     }
 
-    private void ActivarBotones(bool estado)
+    private void ActivarBotones(int indiceDialogo, bool estado)
     {
-        if (botonesAControlar != null)
+        if (indiceDialogo >= 0 && indiceDialogo < dialogos.Length)
         {
-            foreach (var boton in botonesAControlar)
+            if (dialogos[indiceDialogo].botonesAControlar != null)
             {
-                if (boton != null)
-                    boton.interactable = estado;
+                foreach (var boton in dialogos[indiceDialogo].botonesAControlar)
+                {
+                    if (boton != null)
+                        boton.interactable = estado;
+                }
             }
         }
     }
