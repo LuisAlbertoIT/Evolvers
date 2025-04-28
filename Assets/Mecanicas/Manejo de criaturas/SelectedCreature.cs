@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SelectedCreature : MonoBehaviour
 {
     private GameManager gameManager;
-    private HorizontalLayoutGroup hlg;
+    private GridLayoutGroup hlg;
     public Button button;
     public GameObject creaturePanel;
     public GameObject infoPanel;
@@ -16,7 +16,7 @@ public class SelectedCreature : MonoBehaviour
     void Awake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
-        hlg = GetComponentInChildren<HorizontalLayoutGroup>();
+        hlg = GetComponentInChildren<GridLayoutGroup>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
