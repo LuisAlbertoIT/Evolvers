@@ -27,8 +27,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2, y: 1.4, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.03125}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6326059554783776912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -279,8 +279,8 @@ MonoBehaviour:
   activeAtk: 
   canMove: 1
   canAct: 1
-  healthBarBGTex: {fileID: 2800000, guid: a4a1647dcd8c9a84b876d90b5f18e2ba, type: 3}
-  healthBarFillTex: {fileID: 2800000, guid: 48a8f100600e69047900d0ba2c222e8c, type: 3}
+  healthBarBGTex: {fileID: 2800000, guid: 464f21f121bac5f4fb9ea6a47a824954, type: 3}
+  healthBarFillTex: {fileID: 2800000, guid: 86301f2959676cc4b8ca8af8ccb664f3, type: 3}
   healthBarBGRenderer: {fileID: 8559344524145824889}
   healthBarFillRenderer: {fileID: 2897838888472392375}
   healthBarDisplayDuration: 3
@@ -376,7 +376,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2, y: 1.4, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.03125}
+  m_LocalScale: {x: 16, y: 16, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6326059554783776912}

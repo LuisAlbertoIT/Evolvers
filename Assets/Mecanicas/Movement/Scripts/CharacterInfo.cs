@@ -98,7 +98,7 @@ public class CharacterInfo : MonoBehaviour
         currentHP = Mathf.Min(maxHP, currentHP + amount);
         Debug.Log($"{characterName} heals for {amount}! HP: {currentHP}/{maxHP}");
         UpdateHealthBar();
-        ShowHealthBarTemporarily();
+       ShowHealthBarTemporarily();
     }
 
     private void Die(CharacterInfo attacker)
