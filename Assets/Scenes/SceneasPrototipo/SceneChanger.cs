@@ -37,7 +37,10 @@ public class SceneChanger : MonoBehaviour
        
         StartCoroutine(SceneLoad(nombreEscena));
         if(SceneManager.GetActiveScene().name != "test" && SceneManager.GetActiveScene().name != "Credito")
-            gameManager.DesactivarCriaturasEnProximaEscena();
+            if (gameManager != null)
+            {
+                gameManager.DesactivarCriaturasEnProximaEscena();
+            }
 
     }
 
@@ -50,7 +53,7 @@ public class SceneChanger : MonoBehaviour
 
     public IEnumerator SceneLoad (string nombreEscena)
     {
-        //transitionAnimator.SetTrigger("StartTranstion");
+        transitionAnimator.SetTrigger("StartTranstion");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(nombreEscena);
 

@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [System.Obsolete]
     public void LimpiarObjetosNoReferenciados()
     {
         

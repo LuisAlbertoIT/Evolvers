@@ -16,19 +16,20 @@ public class Dialogo : MonoBehaviour
     bool isDestroyed = false;
     private Movimiento movimiento;
 
-    private string saveKey; // Cada diálogo tendrá su clave única
+    private string saveKey; 
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject); // El diálogo no se destruye al cambiar de escena
-        saveKey = "Dialogo_" + gameObject.name; // Crear clave basada en el nombre del GameObject
+        DontDestroyOnLoad(this.gameObject); 
+        saveKey = "Dialogo_" + gameObject.name; 
     }
 
+    [System.Obsolete]
     void Start()
     {
         movimiento = FindObjectOfType<Movimiento>();
 
-        // Revisar si este diálogo fue destruido antes (consultar DialogoData)
+       
         if (DialogoData.Instance != null && DialogoData.Instance.EstaDialogoDestruido(saveKey.GetHashCode()))
         {
             isDestroyed = true;

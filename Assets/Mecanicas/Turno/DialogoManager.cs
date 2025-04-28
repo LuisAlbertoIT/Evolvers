@@ -158,7 +158,7 @@ public class DialogoManager : MonoBehaviour
                     imagen.SetActive(false);
             }
 
-            GuardarDialogoDestruido(dialogoActivo); // Ahora usa el Singleton
+            GuardarDialogoDestruido(dialogoActivo); 
             Destroy(dialogos[dialogoActivo].panelDialogo);
             dialogos[dialogoActivo].panelDialogo = null;
 
@@ -192,7 +192,7 @@ public class DialogoManager : MonoBehaviour
 
         if (dialogos[indice].panelDialogo != null)
         {
-            GuardarDialogoDestruido(indice); // Ahora usa el Singleton
+            GuardarDialogoDestruido(indice);
             Destroy(dialogos[indice].panelDialogo);
             dialogos[indice].panelDialogo = null;
         }
