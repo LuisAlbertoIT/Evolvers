@@ -25,6 +25,7 @@ public class TurnManager : MonoBehaviour
     public Button attackBtn;
     public GameObject turnPanel;
     public GameObject attackPanel;
+    public GameObject winPanel;
     private Button btn;
     public List<Button> buttons;
     private bool gameOver = false;
@@ -275,10 +276,6 @@ public class TurnManager : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GetComponent<SceneChanger>().CargarEscena("Credito");
-        }
     }
 
     private void EnemyTurn()
@@ -475,19 +472,24 @@ public class TurnManager : MonoBehaviour
     {
         if (characters.Count == 0 && !gameOver)
         {
+            winPanel.SetActive(true);
+            turnPanel.SetActive(false);
             ClearAttackMenu();
             Debug.Log("Game Over");
             gameOver = true;
-           
+            GameObject.Find("WinText").GetComponent<TMP_Text>().text = "You Lose!";
 
         }
 
         if (enemies.Count == 0 && !gameOver)
         {
+            winPanel.SetActive(true);
+            turnPanel.SetActive(false);
             ClearAttackMenu();
             Debug.Log("Winner");
             gameOver = true;
-            
+            GameObject.Find("WinText").GetComponent<TMP_Text>().text = "You Win!";
+
         }
     }
 
