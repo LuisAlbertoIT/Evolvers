@@ -30,20 +30,31 @@ public class DialogoManager : MonoBehaviour
 
     void Start()
     {
-        foreach (var d in dialogos)
+        for (int i = 0; i < dialogos.Length; i++)
         {
-            d.panelDialogo.SetActive(false);
-            foreach (var imagen in d.imagenesDialogo)
+            if (DialogoData.Instance != null && DialogoData.Instance.EstaDialogoDestruido(i))
             {
-                if (imagen != null)
-                    imagen.SetActive(false);
+                if (dialogos[i].panelDialogo != null)
+                    Destroy(dialogos[i].panelDialogo);
+                dialogos[i].panelDialogo = null;
+            }
+            else
+            {
+                if (dialogos[i].panelDialogo != null)
+                    dialogos[i].panelDialogo.SetActive(false);
+
+                foreach (var imagen in dialogos[i].imagenesDialogo)
+                {
+                    if (imagen != null)
+                        imagen.SetActive(false);
+                }
             }
         }
 
         if (imagenFinal != null)
             imagenFinal.SetActive(false);
 
-        ActivarBotones(true); 
+        ActivarBotones(true);
     }
 
     void Update()
@@ -71,6 +82,12 @@ public class DialogoManager : MonoBehaviour
             return;
         }
 
+        if (DialogoData.Instance != null && DialogoData.Instance.EstaDialogoDestruido(indice))
+        {
+            Debug.LogWarning("Intentaste activar un diálogo que ya fue destruido.");
+            return;
+        }
+
         if (dialogoActivo != -1)
         {
             if (dialogos[dialogoActivo].panelDialogo != null)
@@ -86,7 +103,6 @@ public class DialogoManager : MonoBehaviour
         dialogoActivo = indice;
         indiceLinea = 0;
 
-
         if (dialogos[dialogoActivo].panelDialogo != null)
         {
             hayDialogoActivo = true;
@@ -98,12 +114,11 @@ public class DialogoManager : MonoBehaviour
                     imagen.SetActive(true);
             }
 
-            ActivarBotones(false); 
+            ActivarBotones(false);
             StartCoroutine(EscribirLinea());
         }
         else
         {
-            
             hayDialogoActivo = false;
             ActivarBotones(true);
             Debug.LogWarning("No se puede activar diálogo: Panel destruido.");
@@ -143,11 +158,14 @@ public class DialogoManager : MonoBehaviour
                     imagen.SetActive(false);
             }
 
+            GuardarDialogoDestruido(dialogoActivo); // Ahora usa el Singleton
             Destroy(dialogos[dialogoActivo].panelDialogo);
+            dialogos[dialogoActivo].panelDialogo = null;
+
             dialogoActivo = -1;
             hayDialogoActivo = false;
 
-            ActivarBotones(true); 
+            ActivarBotones(true);
         }
     }
 
@@ -174,11 +192,20 @@ public class DialogoManager : MonoBehaviour
 
         if (dialogos[indice].panelDialogo != null)
         {
+            GuardarDialogoDestruido(indice); // Ahora usa el Singleton
             Destroy(dialogos[indice].panelDialogo);
             dialogos[indice].panelDialogo = null;
         }
 
-        ActivarBotones(true); 
+        ActivarBotones(true);
+    }
+
+    private void GuardarDialogoDestruido(int indice)
+    {
+        if (DialogoData.Instance != null)
+        {
+            DialogoData.Instance.MarcarDialogoDestruido(indice);
+        }
     }
 
     private void ActivarBotones(bool estado)

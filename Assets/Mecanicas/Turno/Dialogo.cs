@@ -10,14 +10,32 @@ public class Dialogo : MonoBehaviour
     public TextMeshProUGUI dialogoIncubar;
     public string[] lines;
     public float textSpeed = 0.1f;
-    public GameObject imagenFinal; 
+    public GameObject imagenFinal;
+
     int index;
-    bool isDestroyed = false; 
+    bool isDestroyed = false;
     private Movimiento movimiento;
+
+    private string saveKey; // Cada diálogo tendrá su clave única
+
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject); // El diálogo no se destruye al cambiar de escena
+        saveKey = "Dialogo_" + gameObject.name; // Crear clave basada en el nombre del GameObject
+    }
 
     void Start()
     {
         movimiento = FindObjectOfType<Movimiento>();
+
+        // Revisar si este diálogo fue destruido antes (consultar DialogoData)
+        if (DialogoData.Instance != null && DialogoData.Instance.EstaDialogoDestruido(saveKey.GetHashCode()))
+        {
+            isDestroyed = true;
+            gameObject.SetActive(false);
+            return;
+        }
+
         if (imagenFinal != null)
             imagenFinal.SetActive(true);
 
@@ -29,7 +47,7 @@ public class Dialogo : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            if (isDestroyed) return; 
+            if (isDestroyed) return;
 
             if (dialogoIncubar.text == lines[index])
             {
@@ -47,24 +65,18 @@ public class Dialogo : MonoBehaviour
     {
         index = 0;
         StartCoroutine(WriteLine());
-      
+
         if (movimiento != null)
             movimiento.enabled = false;
-
-      
-
-
-
     }
 
     IEnumerator WriteLine()
     {
-
         dialogoIncubar.text = string.Empty;
         foreach (char letter in lines[index].ToCharArray())
         {
             dialogoIncubar.text += letter;
-            yield return new WaitForSecondsRealtime(textSpeed); 
+            yield return new WaitForSecondsRealtime(textSpeed);
         }
 
         if (imagenFinal != null)
@@ -73,7 +85,7 @@ public class Dialogo : MonoBehaviour
 
     public void NextLine()
     {
-        if (isDestroyed) return; 
+        if (isDestroyed) return;
 
         if (index < lines.Length - 1)
         {
@@ -93,27 +105,25 @@ public class Dialogo : MonoBehaviour
 
         isDestroyed = true;
 
-       
         if (imagenFinal != null)
             imagenFinal.SetActive(false);
 
-        StopAllCoroutines(); 
+        StopAllCoroutines();
+
+        // Guardar en el Singleton que este diálogo fue destruido
+        if (DialogoData.Instance != null)
+        {
+            DialogoData.Instance.MarcarDialogoDestruido(saveKey.GetHashCode());
+        }
 
         gameObject.SetActive(false);
-        DontDestroyOnLoad(this.gameObject);
+
         if (movimiento != null)
             movimiento.enabled = true;
-
-        
-
-
     }
 
-  
     public void OnButtonDestroyPressed()
     {
-         gameObject.SetActive(false);
-
-        DontDestroyOnLoad(this.gameObject);
+        DestroyDialogue();
     }
 }
